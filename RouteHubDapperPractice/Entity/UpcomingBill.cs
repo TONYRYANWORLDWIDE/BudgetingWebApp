@@ -16,6 +16,6 @@ namespace RouteHubDapperPractice.Entity
         public string Type { get; set; }
         public Nullable<decimal> RunningTotal { get; set; }
         public string UserID { get; set; }
-        public bool Paid_ { get; set; }
+        public bool Paid { get; set; }
     }
 }
