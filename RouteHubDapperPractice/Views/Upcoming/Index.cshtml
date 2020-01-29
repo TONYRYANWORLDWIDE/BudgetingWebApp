@@ -1,5 +1,4 @@
-﻿@page
-@model RouteHubDapperPractice.Models.BillsViewModel
+﻿@model RouteHubDapperPractice.Models.BillsViewModel
 
 <h1>Upcoming Bills</h1>
 <table class="table">
@@ -14,14 +13,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.TheUpcomingBills)
+        @foreach (var upcomingBill in Model.TheUpcomingBills)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => upcomingBill.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
+                    @Html.DisplayFor(modelItem => upcomingBill.Amount)
                 </td>
             </tr>
         }
