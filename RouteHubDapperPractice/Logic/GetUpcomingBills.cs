@@ -15,7 +15,6 @@ namespace RouteHubDapperPractice.Logic
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("ASPUser", ASPUser);
-
             var upcomingBills = new Instance<UpcomingBill>().Execute("dbo.getUpcomingBills", parameters).ToList();
             return upcomingBills;
         }

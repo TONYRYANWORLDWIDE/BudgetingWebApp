@@ -4,8 +4,19 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Hidden TO DO</th>
             <th>
                 Name
+            </th>
+
+            <th>
+                Date
+            </th>
+            <th>
+                Day Of Week
+            </th>
+            <th>
+                Type
             </th>
             <th>
                 Amount
@@ -15,14 +26,27 @@
     <tbody>
         @foreach (var upcomingBill in Model.TheUpcomingBills)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => upcomingBill.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => upcomingBill.Amount)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.HiddenFor(modelItem => upcomingBill.id, new { htmlAttributes = new { @class = "form-control Type" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => upcomingBill.Name, new { htmlAttributes = new { @class = "form-control Type" } })
+            </td>
+
+            <td>
+                @Html.EditorFor(modelItem => upcomingBill.TheDate, new { htmlAttributes = new { @class = "form-control Type" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => upcomingBill.DayOfWeek, new { htmlAttributes = new { @class = "form-control Type" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => upcomingBill.Type, new { htmlAttributes = new { @class = "form-control Type" } })
+            </td>
+            <td>
+                @Html.EditorFor(modelItem => upcomingBill.Amount, new { htmlAttributes = new { @class = "form-control Type" } })
+            </td>
+        </tr>
         }
     </tbody>
 </table>
