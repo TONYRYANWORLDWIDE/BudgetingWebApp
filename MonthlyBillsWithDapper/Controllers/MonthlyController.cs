@@ -19,5 +19,14 @@ namespace MonthlyBillsWithDapper.Controllers
             model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
             return View(model);
         }
+
+        public bool UpdateMonthly(MonthlyBill monthlyBill)
+        {
+            var mgr = new GetBills();
+            return mgr.UpdateMonthly(monthlyBill);
+        }
+
+
+
     }
 }

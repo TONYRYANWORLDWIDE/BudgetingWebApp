@@ -25,5 +25,19 @@ namespace MonthlyBillsWithDapper.Logic
             var monthlyBills = new Instance<MonthlyBill>().Execute("dbo.getMonthlyBills", parameters).ToList();
             return monthlyBills;
         }
+
+        public bool UpdateMonthly(MonthlyBill monthlyBill)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("id", monthlyBill.id);
+            parameters.Add("Bill", monthlyBill.Bill);
+            parameters.Add("Cost", monthlyBill.Cost);
+            parameters.Add("Date", monthlyBill.Date);
+            
+            var procResponse = new Instance<dynamic>().Execute("dbo.updateMonthlyBills", parameters);
+            if (procResponse != null)
+                return true;
+            return false; 
+        }
     }
 }
