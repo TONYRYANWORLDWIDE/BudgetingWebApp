@@ -47,14 +47,6 @@
     $("body").on("click", "#MonthlyBillsTable .Update", function () {
 
         var row = $(this).closest("tr");
-            //$("td", row).each(function () {
-            //if ($(this).find("input").length > 0) {
-            //var span = $(this).find("span");
-            //var input = $(this).find("input");
-            //    span.html(input.val());
-            //    console.log(input);
-            //}
-            //});   
         var monthlyBill = {}
         //var id = row.find(".id").find('input').html();
         var id = row.find(".id").find('input').val();
