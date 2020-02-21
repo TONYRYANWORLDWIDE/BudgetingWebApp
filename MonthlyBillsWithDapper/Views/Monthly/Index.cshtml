@@ -72,8 +72,18 @@
     });
 
     $("#submitNewMonthlyBill").click(function () {
-         var g = $("form").serializeArray();
-        console.log(g);
+        var g = $("form").serializeArray();
+        var monthlybill = {}
+
+        var bill = console.log(g[0].value);
+        var date = console.log(g[1].value);
+        var cost = console.log(g[2].value);
+
+        monthlybill.bill = bill;
+        monthlybill.date = date;
+        monthlybill.cost = cost;
+
+
         //$( "form" ).submit(function( event ) {
         //  console.log( $( this ).serializeArray() );
         //  event.preventDefault();
