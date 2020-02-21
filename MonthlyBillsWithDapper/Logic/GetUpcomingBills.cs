@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RouteHubDapperPractice.Entity;
-using static RouteHubDapperPractice.Data.DataAccess;
+using MonthlyBillsWithDapper.Entity;
+using static MonthlyBillsWithDapper.Data.DataAccess;
 
 
-namespace RouteHubDapperPractice.Logic
+namespace MonthlyBillsWithDapper.Logic
 {
     public class GetUpcomingBills
     {
@@ -17,6 +17,13 @@ namespace RouteHubDapperPractice.Logic
             parameters.Add("ASPUser", ASPUser);
             var upcomingBills = new Instance<UpcomingBill>().Execute("dbo.getUpcomingBills", parameters).ToList();
             return upcomingBills;
+        }
+        public List<MonthlyBill> getMonthlyBills(string ASPUser)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("ASPUser", ASPUser);
+            var monthlyBills = new Instance<MonthlyBill>().Execute("dbo.getMonthlyBills", parameters).ToList();
+            return monthlyBills
         }
     }
 }

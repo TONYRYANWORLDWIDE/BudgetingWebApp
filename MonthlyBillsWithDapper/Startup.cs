@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.Web.BrowserLink;
 
-namespace RouteHubDapperPractice
+namespace MonthlyBillsWithDapper
 {
     public class Startup
     {

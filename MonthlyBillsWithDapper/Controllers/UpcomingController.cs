@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RouteHubDapperPractice.Entity;
-using RouteHubDapperPractice.Logic;
-using RouteHubDapperPractice.Models;
+using MonthlyBillsWithDapper.Entity;
+using MonthlyBillsWithDapper.Logic;
+using MonthlyBillsWithDapper.Models;
 
-namespace RouteHubDapperPractice.Controllers
+namespace MonthlyBillsWithDapper.Controllers
 {
     public class UpcomingController : Controller
     {

@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RouteHubDapperPractice.Data
+namespace MonthlyBillsWithDapper.Data
 {
     public class DataAccess
     {

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RouteHubDapperPractice.Entity;
+using MonthlyBillsWithDapper.Entity;
 
 
-namespace RouteHubDapperPractice.Models
+namespace MonthlyBillsWithDapper.Modelss
 {
     public class BillsViewModel
     {
@@ -13,9 +13,12 @@ namespace RouteHubDapperPractice.Models
         public BillsViewModel()
         {
             TheUpcomingBills = new List<UpcomingBill>();
+            MonthlyBills = new List<MonthlyBill>();
         }
 
         public List<UpcomingBill> TheUpcomingBills { get; set; }
+        public List<MonthlyBill> MonthlyBills { get; set; }
+
+
     }
 }
-
