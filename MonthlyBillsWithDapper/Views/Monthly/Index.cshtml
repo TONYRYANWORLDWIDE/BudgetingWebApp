@@ -68,20 +68,24 @@
     $(".Create").on("click", function () {
 
         $("#CreateMonthlyBillForm").toggle();
+
     });
 
     $("#submitNewMonthlyBill").click(function () {
-        //$("#CreateMonthlyBillForm").submit(function () {
-
-        var Bill = $("CreateMonthlyBillForm").find("Bill");
-        console.log(Bill);
-
-                    console.log("submitting form");
+         var g = $("form").serializeArray();
+        console.log(g);
+        //$( "form" ).submit(function( event ) {
+        //  console.log( $( this ).serializeArray() );
+        //  event.preventDefault();
         //});
 
-        //var monthlyBill = {}
-        //var Bill = $("#submitNewMonthlyBill").find(".Bill").html();
+
+        //$("#CreateMonthlyBillForm").submit(function () {
+
+        //var Bill = $("CreateMonthlyBillForm").find("Bill");
         //console.log(Bill);
+        //console.log("submitting form");
+
     });
         //$(".Create").toggleText("Create", "Hide");
 
