@@ -3,8 +3,16 @@
 
 
 <h1>MonthlyBills</h1>
+<p>
+    <a class="Create" href="javascript:;">Create</a>
+</p>
 
-
+<form id="CreateMonthlyBillForm">
+    <span class="Bill">Bill:</span> <input type="text" name="Bill">
+    <span class="Cost">Cost: </span><input type="text" name="Cost">
+    <span class="Date">Date: </span><input type="text" name="Date">
+    <button type="button" id="submitNewMonthlyBill">Submit</button>
+</form>
 <table id="MonthlyBillsTable" class="table">
     <thead>
         <tr>
@@ -43,6 +51,41 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
+
+
+    
+    //jQuery.fn.extend({
+    //        toggleText: function (a, b){
+    //            var isClicked = false;
+    //            var that = this;
+    //            this.click(function (){
+    //                if (isClicked) { that.text(a); isClicked = false; }
+    //                else { that.text(b); isClicked = true; }
+    //            });
+    //            return this;
+    //    }
+    //});
+    $(".Create").on("click", function () {
+
+        $("#CreateMonthlyBillForm").toggle();
+    });
+
+    $("#submitNewMonthlyBill").click(function () {
+        //$("#CreateMonthlyBillForm").submit(function () {
+
+        var Bill = $("CreateMonthlyBillForm").find("Bill");
+        console.log(Bill);
+
+                    console.log("submitting form");
+        //});
+
+        //var monthlyBill = {}
+        //var Bill = $("#submitNewMonthlyBill").find(".Bill").html();
+        //console.log(Bill);
+    });
+        //$(".Create").toggleText("Create", "Hide");
+
+
 
     $("body").on("click", "#MonthlyBillsTable .Update", function () {
 

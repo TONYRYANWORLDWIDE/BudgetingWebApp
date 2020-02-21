@@ -75,3 +75,7 @@ body {
     background-color: white;
     /*border:solid black 5px;*/
 }
+
+#CreateMonthlyBillForm {
+    display: none;
+}
