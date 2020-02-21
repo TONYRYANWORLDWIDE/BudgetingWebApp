@@ -8,7 +8,7 @@
 <table id="MonthlyBillsTable" class="table">
     <thead>
         <tr>
-            <th>id</th>
+            <th class="TJR_th_Hidden"></th>
             <th>Bill</th>
             <th>Cost</th>
             <th>Day</th>
@@ -20,7 +20,7 @@
         {
         <tr>
             <td class="id">               
-               @Html.EditorFor(modelItem => monthlyBills.id, new { htmlAttributes = new { @class = "form-control id" } }) 
+               @Html.HiddenFor(modelItem => monthlyBills.id, new { htmlAttributes = new { @class = "form-control id" } }) 
             </td>
    
             <td class="Bill">
