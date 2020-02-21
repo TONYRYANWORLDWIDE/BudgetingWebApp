@@ -9,7 +9,7 @@ using static MonthlyBillsWithDapper.Data.DataAccess;
 
 namespace MonthlyBillsWithDapper.Logic
 {
-    public class GetUpcomingBills
+    public class GetBills
     {
         public List<UpcomingBill> getUpcomingBills(string ASPUser)
         {
@@ -23,7 +23,7 @@ namespace MonthlyBillsWithDapper.Logic
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("ASPUser", ASPUser);
             var monthlyBills = new Instance<MonthlyBill>().Execute("dbo.getMonthlyBills", parameters).ToList();
-            return monthlyBills
+            return monthlyBills;
         }
     }
 }

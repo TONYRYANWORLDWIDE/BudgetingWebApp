@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MonthlyBillsWithDapper.Entity;
 
 
-namespace MonthlyBillsWithDapper.Modelss
+namespace MonthlyBillsWithDapper.Models
 {
     public class BillsViewModel
     {
