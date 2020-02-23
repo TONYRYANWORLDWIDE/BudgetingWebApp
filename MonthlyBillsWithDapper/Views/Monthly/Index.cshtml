@@ -6,9 +6,13 @@
 </p>
 
 <form id="CreateMonthlyBillForm">
-    <span class="Bill">Bill:</span> <input type="text" name="Bill">
-    <span class="Cost">Cost: </span><input type="text" name="Cost">
-    <span class="Date">Date: </span><input type="text" name="Date">
+    <label>
+        <span class="Bill">Bill:</span> 
+    </label>
+    <input type="text"  name="Bill" required>
+
+    <span class="Cost">Cost: </span><input type="text" name="Cost" required>
+    <span class="Date">Date: </span><input type="text" name="Date" id="Date" required>
     <button type="button" id="submitNewMonthlyBill">Submit</button>
 </form>
 <table id="MonthlyBillsTable" class="table">
@@ -47,44 +51,60 @@
 </table>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 <script type="text/javascript">
 
+    $("#CreateMonthlyBillForm").validate({
+
+        rules: {
+            Date: {
+                    required: true,
+                    range: [1, 31]
+            }
+        }
+    });
     $(".Create").on("click", function () {
 
         $("#CreateMonthlyBillForm").toggle();
 
     });
 
-    $("#submitNewMonthlyBill").click(function () {
-        var mb = $("form").serializeArray();
-        console.log(mb);
-        var monthlyBillInsert = {}
-  
-        var Bill = mb[0].value;
-        monthlyBillInsert.Bill = Bill
-        
-        var Cost = mb[1].value;
-        monthlyBillInsert.Cost = Cost
+        $("#submitNewMonthlyBill").click(function () {
+            var mb = $("form").serializeArray();
+            console.log(mb);
 
-        var Date = mb[2].value;
-        monthlyBillInsert.Date = Date
 
-         $.ajax({
-             url: '@Url.Action("InsertMonthly", "Monthly")',
-             method: 'POST',
+
+            var monthlyBillInsert = {}
+
+            var Bill = mb[0].value;
+            monthlyBillInsert.Bill = Bill
+
+            var Cost = mb[1].value;
+            monthlyBillInsert.Cost = Cost
+
+            var Date = mb[2].value;
+            monthlyBillInsert.Date = Date
+
+
+
+            $.ajax({
+                url: '@Url.Action("InsertMonthly", "Monthly")',
+                method: 'POST',
                 data: { monthlyBillInsert: monthlyBillInsert },
-             success: function (response) {
-                 
-                 $("#CreateMonthlyBillForm").trigger("reset");
-                 $("#CreateMonthlyBillForm").toggle();
-                 alert("submitted");
+                success: function (response) {
+
+                    $("#CreateMonthlyBillForm").trigger("reset");
+                    $("#CreateMonthlyBillForm").toggle();
+                    alert("submitted");
 
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");
-                }  
-         });
-    });
+                }
+            });
+        });
+
 
     $("body").on("click", "#MonthlyBillsTable .Update", function () {
 
