@@ -1,7 +1,5 @@
 ﻿@model MonthlyBillsWithDapper.Models.BillsViewModel
 
-
-
 <h1>MonthlyBills</h1>
 <p>
     <a class="Create" href="javascript:;">Create</a>
@@ -48,23 +46,9 @@
     </tbody>
 </table>
 
-
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 
-
-    
-    //jQuery.fn.extend({
-    //        toggleText: function (a, b){
-    //            var isClicked = false;
-    //            var that = this;
-    //            this.click(function (){
-    //                if (isClicked) { that.text(a); isClicked = false; }
-    //                else { that.text(b); isClicked = true; }
-    //            });
-    //            return this;
-    //    }
-    //});
     $(".Create").on("click", function () {
 
         $("#CreateMonthlyBillForm").toggle();
@@ -75,7 +59,6 @@
         var mb = $("form").serializeArray();
         console.log(mb);
         var monthlyBillInsert = {}
-
   
         var Bill = mb[0].value;
         monthlyBillInsert.Bill = Bill
@@ -85,14 +68,10 @@
 
         var Date = mb[2].value;
         monthlyBillInsert.Date = Date
-            
-        console.table(Bill,Cost,Date);
-
 
          $.ajax({
              url: '@Url.Action("InsertMonthly", "Monthly")',
              method: 'POST',
-                //dataType : 'json',
                 data: { monthlyBillInsert: monthlyBillInsert },
              success: function (response) {
                  
@@ -105,36 +84,16 @@
                     alert("Sorry, there's been an error.");
                 }  
          });
-
-        
-        //$("#CreateMonthlyBillForm").toggle();
-        //$( "form" ).submit(function( event ) {
-        //  console.log( $( this ).serializeArray() );
-        //  event.preventDefault();
-        //});
-
-
-        //$("#CreateMonthlyBillForm").submit(function () {
-
-        //var Bill = $("CreateMonthlyBillForm").find("Bill");
-        //console.log(Bill);
-        //console.log("submitting form");
-
     });
-        //$(".Create").toggleText("Create", "Hide");
-
-
 
     $("body").on("click", "#MonthlyBillsTable .Update", function () {
 
         var row = $(this).closest("tr");
         var monthlyBill = {}
-        //var id = row.find(".id").find('input').html();
+
         var id = row.find(".id").find('input').val();
-        console.log(id);
 
         monthlyBill.id = id;
-
 
         var bill = row.find(".Bill").find('input').val();
         monthlyBill.bill = bill;
@@ -159,13 +118,6 @@
                     alert("Sorry, there's been an error.");
                 }  
         });
-
-
     });
-
-
-
-
-
 
 </script>
