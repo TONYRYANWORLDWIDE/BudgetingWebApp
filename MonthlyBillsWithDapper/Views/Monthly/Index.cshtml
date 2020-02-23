@@ -72,8 +72,42 @@
     });
 
     $("#submitNewMonthlyBill").click(function () {
-         var g = $("form").serializeArray();
-        console.log(g);
+        var mb = $("form").serializeArray();
+        console.log(mb);
+        var monthlyBillInsert = {}
+
+  
+        var Bill = mb[0].value;
+        monthlyBillInsert.Bill = Bill
+        
+        var Cost = mb[1].value;
+        monthlyBillInsert.Cost = Cost
+
+        var Date = mb[2].value;
+        monthlyBillInsert.Date = Date
+            
+        console.table(Bill,Cost,Date);
+
+
+         $.ajax({
+             url: '@Url.Action("InsertMonthly", "Monthly")',
+             method: 'POST',
+                //dataType : 'json',
+                data: { monthlyBillInsert: monthlyBillInsert },
+             success: function (response) {
+                 
+                 $("#CreateMonthlyBillForm").trigger("reset");
+                 $("#CreateMonthlyBillForm").toggle();
+                 alert("submitted");
+
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }  
+         });
+
+        
+        //$("#CreateMonthlyBillForm").toggle();
         //$( "form" ).submit(function( event ) {
         //  console.log( $( this ).serializeArray() );
         //  event.preventDefault();

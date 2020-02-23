@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MonthlyBillsWithDapper.Entity;
 using MonthlyBillsWithDapper.Logic;
 using MonthlyBillsWithDapper.Models;
-
+using Newtonsoft.Json;
 namespace MonthlyBillsWithDapper.Controllers
 {
     public class MonthlyController : Controller
@@ -25,8 +25,12 @@ namespace MonthlyBillsWithDapper.Controllers
             var mgr = new GetBills();
             return mgr.UpdateMonthly(monthlyBill);
         }
-
-
-
+        [HttpPost]
+        public ActionResult InsertMonthly(MonthlyBill monthlyBillInsert)
+        {
+            var mgr = new GetBills();
+            mgr.InsertMonthly(monthlyBillInsert);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -39,5 +39,18 @@ namespace MonthlyBillsWithDapper.Logic
                 return true;
             return false; 
         }
+
+        public bool InsertMonthly(MonthlyBill monthlyBill)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("Bill", monthlyBill.Bill);
+            parameters.Add("Cost", monthlyBill.Cost);
+            parameters.Add("Date", monthlyBill.Date);
+            var procResponse = new Instance<dynamic>().Execute("dbo.insertMonthlyBills", parameters);
+            if (procResponse != null)
+                return true;
+            return false;
+        }
+
     }
 }
