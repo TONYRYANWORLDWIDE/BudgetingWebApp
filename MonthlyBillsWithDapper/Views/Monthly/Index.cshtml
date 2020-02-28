@@ -49,41 +49,7 @@
 
 
 <div id="PartialMonthly"></div>
-    <table id="MonthlyBillsTable" class="table">
-        <thead>
-            <tr>
-                <th class="TJR_th_Hidden"></th>
-                <th>Bill</th>
-                <th>Cost</th>
-                <th>Day</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var monthlyBills in Model.MonthlyBills)
-            {
-                <tr>
-                    <td class="id">
-                        @Html.HiddenFor(modelItem => monthlyBills.id, new { htmlAttributes = new { @class = "form-control id" } })
-                    </td>
 
-                    <td class="Bill">
-                        @Html.EditorFor(modelItem => monthlyBills.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })
-                    </td>
-                    <td class="Cost">
-                        @Html.EditorFor(modelItem => monthlyBills.Cost, new { htmlAttributes = new { @class = "form-control Cost" } })
-                    </td>
-                    <td class="Date">
-                        @Html.EditorFor(modelItem => monthlyBills.Date, new { htmlAttributes = new { @class = "form-control Date" } })
-                    </td>
-                    <td>
-                        <a class="Update" href="javascript:;">Update</a>
-                        <a class="Delete" href="javascript:;">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 
 <table id="BringHomeBillsTable" class="table">
     <thead>
@@ -217,9 +183,10 @@
 
     $("document").ready(function () {
 
-        $("#MonthlyBillsTable").hide();
+        //$("#MonthlyBillsTable").hide();
         $("#WeeklyBillsTable").hide();
         $("#BringHomeBillsTable").hide();
+        $("#PartialMonthly").hide();
     });
 
 
@@ -228,7 +195,7 @@
         url: '@Url.Action("PartialMonthly","Monthly")',
         method: 'Get',
         success: function (response) {
-            alert("success");
+
             $('#PartialMonthly').html(response);
         },
         error: function () {
@@ -240,7 +207,8 @@
 
     $("#BringHomeButton").click(function () {
         $("#BringHomeBillsTable").show();
-            $("#MonthlyBillsTable").hide();
+        //$("#MonthlyBillsTable").hide();
+        $("#PartialMonthly").hide();
             $("#WeeklyBillsTable").hide();
             $("#UpcomingBillsTable").hide();
             $(this).addClass("colorButton")
@@ -251,7 +219,7 @@
 
 
         $("#MonthlyBillsButton").click(function () {
-            $("#MonthlyBillsTable").show();
+            $("#PartialMonthly").show();
             $("#WeeklyBillsTable").hide();
             $("#UpcomingBillsTable").hide();
             $("#BringHomeBillsTable").hide();
@@ -261,9 +229,10 @@
             $("#BringHomeButton").removeClass("colorButton")
         });
 
-        $("#WeeklyBillsButton").click(function () {
+    $("#WeeklyBillsButton").click(function () {
+                $("#PartialMonthly").hide();
                 $("#WeeklyBillsTable").show();
-                $("#MonthlyBillsTable").hide();
+                //$("#MonthlyBillsTable").hide();
                 $("#BringHomeBillsTable").hide();
                 $("#UpcomingBillsTable").hide();
                 $(this).addClass("colorButton")
@@ -282,7 +251,7 @@
             success: function (response) {
 
 
-                location.reload();
+                //location.reload();
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");
@@ -291,7 +260,8 @@
 
 
                 $("#UpcomingBillsTable").show();
-                $("#MonthlyBillsTable").hide();
+                //$("#MonthlyBillsTable").hide();
+                $("#PartialMonthly").hide();
                 $("#BringHomeBillsTable").hide();
                 $("#WeeklyBillsTable").hide();
                 $(this).addClass("colorButton")
@@ -335,7 +305,7 @@
                 success: function (response) {
                     $("#CreateMonthlyBillForm").trigger("reset");
                     $("#CreateMonthlyBillForm").toggle();
-                    alert("submitted");
+                     $('#PartialMonthly').html(response);
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");
@@ -377,8 +347,6 @@
         });
     });
 
-
-
         $("body").on("click", "#MonthlyBillsTable .Delete", function () {
 
         var row = $(this).closest("tr");
@@ -396,7 +364,7 @@
                 method: 'POST',
                 data: { id: id },
                 success: function (response) {
-
+                                $('#PartialMonthly').html(response);
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");

@@ -30,17 +30,25 @@ namespace MonthlyBillsWithDapper.Controllers
             return mgr.UpdateMonthly(monthlyBill);
         }
 
-        public bool DeleteMonthly(int id)
+        public PartialViewResult DeleteMonthly(int id)
         {
+            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f"; 
             var mgr = new GetBills();
-            return mgr.DeleteMonthly(id);
+            mgr.DeleteMonthly(id);
+            var model = new BillsViewModel();
+            model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
+            return PartialView("_PartialMonthly", model);
         }
         [HttpPost]
-        public bool InsertMonthly(MonthlyBill monthlyBillInsert)
+        public PartialViewResult InsertMonthly(MonthlyBill monthlyBillInsert)
         {
+            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
             var mgr = new GetBills();
             mgr.InsertMonthly(monthlyBillInsert);
-            return true;
+            var model = new BillsViewModel();
+            model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
+            return PartialView("_PartialMonthly", model);
+            //return true;
             //return RedirectToAction("Index");
         }
 
