@@ -7,25 +7,44 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.grid-container-balance {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    background-color: #000000;
+    padding: 10px;
+}
+
 
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
-    /*background-color: #2196F3;*/
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 10px;
 }
 
-.grid-item {
-    /*background-color: rgba(255, 255, 255, 0.8);*/
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    /*padding: 20px;*/
+.grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+/*.grid-item {
+
     font-size: 30px;
     text-align: center;
-}
+}*/
+
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
+}
+
+
+.colorButton {
+    background-color: red;
 }
 
 .btn-primary {
@@ -36,9 +55,11 @@ a {
 
 
 .DisplayBalance {
-    color: #ff0000;
+    color: #e5e5e5;
     background-color: #000000;
-    border-color: #ffd800
+    border-color: #000000;
+    font-size: 44px;
+    text-align: center;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
