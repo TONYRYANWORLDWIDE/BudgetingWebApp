@@ -339,7 +339,8 @@
                 method: 'POST',
                 data: { monthlyBill: monthlyBill },
                 success: function (response) {
-
+                    $('#PartialMonthly').html(response);
+                    alert("Updated");
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");
