@@ -1,17 +1,21 @@
 ﻿@model MonthlyBillsWithDapper.Models.BillsViewModel
 
-<h1>MonthlyBills</h1>
-<p>
-    <a class="Create" href="javascript:;">Create</a>
-</p>
+    <h1>
+        MonthlyBills        
+    </h1>
+<span><a class="Create" href="javascript:;">Create</a></span>
 
 
-    <p>
 
-        @Html.Raw("Fuck")
-        @Html.DisplayFor(m => m.bankBalance.AvailableBalance)
-    </p>
-</div>
+<div>
+    <span>
+        Bank Balance
+    </span>
+    <span class="DisplayBalance">
+        @Html.DisplayFor(m => m.bankBalance.KeyBalance)
+    </span>
+</div>   
+
 
 
 
@@ -164,7 +168,12 @@
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 <script type="text/javascript">
 
+    $("document").ready(function () {
 
+            $("#MonthlyBillsTable").hide();
+            $("#WeeklyBillsTable").hide();
+
+    });
         $("#MonthlyBillsButton").click(function () {
             $("#MonthlyBillsTable").show();
             $("#WeeklyBillsTable").hide();

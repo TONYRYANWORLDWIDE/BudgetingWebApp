@@ -18,6 +18,13 @@ a {
   border-color: #1861ac;
 }
 
+
+.DisplayBalance {
+    color: #ff0000;
+    background-color: #000000;
+    border-color: #ffd800
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
