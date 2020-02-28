@@ -120,6 +120,7 @@ body {
     /*border:solid black 5px;*/
 }
 
-#CreateMonthlyBillForm {
+#CreateMonthlyBillForm ,
+#CreateWeeklyBillForm {
     display: none;
 }

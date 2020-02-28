@@ -1,0 +1,123 @@
+﻿@model MonthlyBillsWithDapper.Models.BillsViewModel
+
+
+<a class="CreateWeekly" href="javascript:;">Create</a>
+
+
+<form id="CreateWeeklyBillForm">
+
+    <span class="Bill">Bill:</span>
+    <input type="text" name="Bill" required>
+
+    <span class="Cost">Cost: </span>
+    <input type="text" name="Cost" required>
+
+    <span class="Date">Day Of Week: </span>
+    <input type="text" name="DayOfweek" id="DayOfweek" required>
+
+    <button type="button" id="submitNewWeeklyBill">Submit</button>
+</form>
+
+
+<table id="WeeklyBillsTable" class="table">
+    <thead>
+        <tr>
+            <th class="TJR_th_Hidden"></th>
+            <th>Bill</th>
+            <th>Cost</th>
+            <th>Day of Week</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var weeklybill in Model.WeeklyBills)
+        {
+            <tr>
+                <td class="id">
+                    @Html.HiddenFor(modelItem => weeklybill.id, new { htmlAttributes = new { @class = "form-control id" } })
+                </td>
+
+                <td class="Bill">
+                    @Html.EditorFor(modelItem => weeklybill.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })
+                </td>
+                <td class="Cost">
+                    @Html.EditorFor(modelItem => weeklybill.Cost, new { htmlAttributes = new { @class = "form-control Cost" } })
+                </td>
+                <td class="Date">
+                    @Html.EditorFor(modelItem => weeklybill.DayOfWeek, new { htmlAttributes = new { @class = "form-control Date" } })
+                </td>
+                <td>
+                    <a class="Update" href="javascript:;">Update</a>
+                    <a class="Delete" href="javascript:;">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script type="text/javascript">
+
+    // $("#CreateWeeklyBillForm").validate({
+
+    //    rules: {
+    //        Date: {
+    //                required: true,
+    //                range: [1, 31]
+    //        }
+    //    }
+    //});
+    $(".CreateWeekly").on("click", function () {
+
+        $("#CreateWeeklyBillForm").toggle();
+
+    });
+
+        $("#submitNewWeeklyBill").click(function () {
+            var wb = $("#CreateWeeklyBillForm").serializeArray();
+            console.log(wb);
+            var weeklyBillInsert = {}
+            var Bill = wb[0].value;
+            weeklyBillInsert.Bill = Bill
+            var Cost = wb[1].value;
+            weeklyBillInsert.Cost = Cost
+            var DayOfWeek = wb[2].value;
+            weeklyBillInsert.DayOfWeek = DayOfWeek
+
+            $.ajax({
+                url: '@Url.Action("InsertWeekly", "Monthly")',
+                method: 'POST',
+                data: { weeklyBillInsert: weeklyBillInsert },
+                success: function (response) {
+                    $("#CreateWeeklyBillForm").trigger("reset");
+                    $("#CreateWeeklyBillForm").toggle();
+                     $('#PartialWeekly').html(response);
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }
+            });
+        });
+
+        $("body").on("click", "#WeeklyBillsTable .Delete", function () {
+
+        var row = $(this).closest("tr");
+        var id = row.find(".id").find('input').val();
+
+        $.ajax({
+            url: '@Url.Action("DeleteWeekly", "Monthly")',
+            method: 'POST',
+            data: { id: id },
+            success: function (response) {
+                $('#PartialWeekly').html(response);
+            },
+            error: function () {
+                alert("Sorry, there's been an error.");
+            }
+            });
+        });
+
+
+</script>

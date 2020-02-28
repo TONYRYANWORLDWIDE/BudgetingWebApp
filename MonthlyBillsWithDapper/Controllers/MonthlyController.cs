@@ -52,10 +52,18 @@ namespace MonthlyBillsWithDapper.Controllers
             var model = new BillsViewModel();
             model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
             return PartialView("_PartialMonthly", model);
-            //return true;
-            //return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public PartialViewResult InsertWeekly(WeeklyBill weeklyBillInsert)
+        {
+            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
+            var mgr = new GetBills();
+            mgr.InsertWeekly(weeklyBillInsert);
+            var model = new BillsViewModel();
+            model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
+            return PartialView("_PartialWeekly", model);
+        }
 
         public ActionResult getUpcoming()
         {
@@ -64,7 +72,6 @@ namespace MonthlyBillsWithDapper.Controllers
             mgr.getUpcomingBills(ASPUser);
             return RedirectToAction("Index");
         }
-
 
         public PartialViewResult PartialMonthly()
         {
@@ -75,5 +82,13 @@ namespace MonthlyBillsWithDapper.Controllers
             return PartialView("_PartialMonthly", model);
         }
 
+        public PartialViewResult PartialWeekly()
+        {
+            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
+            var model = new BillsViewModel();
+            var mgr = new GetBills();
+            model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
+            return PartialView("_PartialWeekly", model);
+        }
     }
 }

@@ -77,6 +77,17 @@ namespace MonthlyBillsWithDapper.Logic
             return false;
         }
 
+
+        public bool DeleteWeekly(int id)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("id", id);
+            var procResponse = new Instance<dynamic>().Execute("dbo.deleteWeeklyBills", parameters);
+            if (procResponse != null)
+                return true;
+            return false;
+        }
+
         public bool InsertMonthly(MonthlyBill monthlyBill)
         {
             DynamicParameters parameters = new DynamicParameters();
@@ -90,6 +101,19 @@ namespace MonthlyBillsWithDapper.Logic
                 return true;
             return false;
         }
+        public bool InsertWeekly(WeeklyBill weeklyBill)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("Bill", weeklyBill.Bill);
+            parameters.Add("Cost", weeklyBill.Cost);
+            parameters.Add("DayOfWeek", weeklyBill.DayOfWeek);
+            parameters.Add("UserID", "a5ca7194-40f8-4d8e-81ed-d56e7338317f"); // TODO use ASP User once login added
+            var procResponse = new Instance<dynamic>().Execute("dbo.insertWeeklyBills", parameters);
+            if (procResponse != null)
+                return true;
+            return false;
+        }
+
 
     }
 }

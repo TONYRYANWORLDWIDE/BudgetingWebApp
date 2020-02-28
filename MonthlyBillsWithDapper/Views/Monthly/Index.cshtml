@@ -119,42 +119,8 @@
     </tbody>
 </table>
 
-<table id="WeeklyBillsTable" class="table">
-    <thead>
-        <tr>
-            <th class="TJR_th_Hidden"></th>
-            <th>Bill</th>
-            <th>Cost</th>
-            <th>Day of Week</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var weeklybill in Model.WeeklyBills)
-        {
-            <tr>
-                <td class="id">
-                    @Html.HiddenFor(modelItem => weeklybill.id, new { htmlAttributes = new { @class = "form-control id" } })
-                </td>
 
-                <td class="Bill">
-                    @Html.EditorFor(modelItem => weeklybill.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })
-                </td>
-                <td class="Cost">
-                    @Html.EditorFor(modelItem => weeklybill.Cost, new { htmlAttributes = new { @class = "form-control Cost" } })
-                </td>
-                <td class="Date">
-                    @Html.EditorFor(modelItem => weeklybill.DayOfWeek, new { htmlAttributes = new { @class = "form-control Date" } })
-                </td>
-                <td>
-                    <a class="Update" href="javascript:;">Update</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
+<div id="PartialWeekly"></div>
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -162,9 +128,7 @@
 <script type="text/javascript">
 
     $("document").ready(function () {
-
-        //$("#MonthlyBillsTable").hide();
-        $("#WeeklyBillsTable").hide();
+        $("#PartialWeekly").hide();
         $("#BringHomeBillsTable").hide();
         $("#PartialMonthly").hide();
     });
@@ -183,13 +147,27 @@
         }
     });
 
+        $.ajax({
+
+        url: '@Url.Action("PartialWeekly","Monthly")',
+        method: 'Get',
+        success: function (response) {
+
+            $('#PartialWeekly').html(response);
+        },
+        error: function () {
+            alert("Sorry, there's been an error. Partial Monthly");
+        }
+    });
+
+
 
 
     $("#BringHomeButton").click(function () {
         $("#BringHomeBillsTable").show();
         //$("#MonthlyBillsTable").hide();
         $("#PartialMonthly").hide();
-            $("#WeeklyBillsTable").hide();
+            $("#PartialWeekly").hide();
             $("#UpcomingBillsTable").hide();
             $(this).addClass("colorButton")
             $("#WeeklyBillsButton").removeClass("colorButton")
@@ -200,7 +178,7 @@
 
         $("#MonthlyBillsButton").click(function () {
             $("#PartialMonthly").show();
-            $("#WeeklyBillsTable").hide();
+            $("#PartialWeekly").hide();
             $("#UpcomingBillsTable").hide();
             $("#BringHomeBillsTable").hide();
             $(this).addClass("colorButton")
@@ -211,7 +189,7 @@
 
     $("#WeeklyBillsButton").click(function () {
                 $("#PartialMonthly").hide();
-                $("#WeeklyBillsTable").show();
+                $("#PartialWeekly").show();
                 //$("#MonthlyBillsTable").hide();
                 $("#BringHomeBillsTable").hide();
                 $("#UpcomingBillsTable").hide();
