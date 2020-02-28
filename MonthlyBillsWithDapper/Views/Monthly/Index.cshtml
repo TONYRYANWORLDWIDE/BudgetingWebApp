@@ -5,7 +5,7 @@
 </h1>
 
 
-
+<a class="Create" href="javascript:;">Create</a>
 
 
 
@@ -33,13 +33,16 @@
 
 
 <form id="CreateMonthlyBillForm">
-    <label>
-        <span class="Bill">Bill:</span>
-    </label>
-    <input type="text" name="Bill" required>
 
-    <span class="Cost">Cost: </span><input type="text" name="Cost" required>
-    <span class="Date">Date: </span><input type="text" name="Date" id="Date" required>
+     <span class="Bill">Bill:</span>  
+     <input type="text" name="Bill" required>
+
+    <span class="Cost">Cost: </span>
+    <input type="text" name="Cost" required>
+
+    <span class="Date">Date: </span>
+    <input type="text" name="Date" id="Date" required>
+
     <button type="button" id="submitNewMonthlyBill">Submit</button>
 </form>
 
@@ -47,7 +50,7 @@
 
 
 <table id="MonthlyBillsTable" class="table">
-    <thead >
+    <thead>
         <tr>
             <th class="TJR_th_Hidden"></th>
             <th>Bill</th>
@@ -94,30 +97,30 @@
     <tbody>
         @foreach (var bringhome in Model.BringHomes)
         {
-        <tr>
-            <td class="id">
-                @Html.HiddenFor(modelItem => bringhome.id, new { htmlAttributes = new { @class = "form-control id" } })
-            </td>
+            <tr>
+                <td class="id">
+                    @Html.HiddenFor(modelItem => bringhome.id, new { htmlAttributes = new { @class = "form-control id" } })
+                </td>
 
-            <td class="Name">
-                @Html.EditorFor(modelItem => bringhome.Name, new { htmlAttributes = new { @class = "form-control Bill" } })
-            </td>
-            <td class="amount">
-                @Html.EditorFor(modelItem => bringhome.amount, new { htmlAttributes = new { @class = "form-control Cost" } })
-            </td>
-            <td class="DayOfWeek">
-                @Html.EditorFor(modelItem => bringhome.DayOfWeek, new { htmlAttributes = new { @class = "form-control Date" } })
-            </td>
-            <td class="DayOfWeek">
-                @Html.EditorFor(modelItem => bringhome.Frequency, new { htmlAttributes = new { @class = "form-control Date" } })
-            </td>
-            <td class="DayOfWeek">
-                @Html.EditorFor(modelItem => bringhome.PickOnePayDate, new { htmlAttributes = new { @class = "form-control Date" } })
-            </td>
-            <td>
-                <a class="Update" href="javascript:;">Update</a>
-            </td>
-        </tr>
+                <td class="Name">
+                    @Html.EditorFor(modelItem => bringhome.Name, new { htmlAttributes = new { @class = "form-control Bill" } })
+                </td>
+                <td class="amount">
+                    @Html.EditorFor(modelItem => bringhome.amount, new { htmlAttributes = new { @class = "form-control Cost" } })
+                </td>
+                <td class="DayOfWeek">
+                    @Html.EditorFor(modelItem => bringhome.DayOfWeek, new { htmlAttributes = new { @class = "form-control Date" } })
+                </td>
+                <td class="DayOfWeek">
+                    @Html.EditorFor(modelItem => bringhome.Frequency, new { htmlAttributes = new { @class = "form-control Date" } })
+                </td>
+                <td class="DayOfWeek">
+                    @Html.EditorFor(modelItem => bringhome.PickOnePayDate, new { htmlAttributes = new { @class = "form-control Date" } })
+                </td>
+                <td>
+                    <a class="Update" href="javascript:;">Update</a>
+                </td>
+            </tr>
 
 
         }
@@ -212,7 +215,7 @@
         $("#MonthlyBillsTable").hide();
         $("#WeeklyBillsTable").hide();
         $("#BringHomeBillsTable").hide();
-        
+
 
     });
 
