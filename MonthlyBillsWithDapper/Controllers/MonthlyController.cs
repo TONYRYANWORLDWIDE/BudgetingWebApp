@@ -37,5 +37,14 @@ namespace MonthlyBillsWithDapper.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult getUpcoming()
+        {
+            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
+            var mgr = new GetBills();
+            mgr.getUpcomingBills(ASPUser);
+            return RedirectToAction("Index");
+        }
+
     }
 }

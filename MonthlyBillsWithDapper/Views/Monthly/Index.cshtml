@@ -252,10 +252,26 @@
             });
 
 
-        $("#UpcomingBillsButton").click(function () {
+    $("#UpcomingBillsButton").click(function () {
+
+
+        $.ajax({
+            url: '@Url.Action("Index", "Monthly")',
+            method: 'Get',
+            success: function (response) {
+
+
+                location.reload();
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }
+        })
+
+
                 $("#UpcomingBillsTable").show();
-            $("#MonthlyBillsTable").hide();
-                            $("#BringHomeBillsTable").hide();
+                $("#MonthlyBillsTable").hide();
+                $("#BringHomeBillsTable").hide();
                 $("#WeeklyBillsTable").hide();
                 $(this).addClass("colorButton")
                 $("#MonthlyBillsButton").removeClass("colorButton")
