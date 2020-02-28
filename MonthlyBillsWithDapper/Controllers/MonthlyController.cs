@@ -29,12 +29,19 @@ namespace MonthlyBillsWithDapper.Controllers
             var mgr = new GetBills();
             return mgr.UpdateMonthly(monthlyBill);
         }
+
+        public bool DeleteMonthly(int id)
+        {
+            var mgr = new GetBills();
+            return mgr.DeleteMonthly(id);
+        }
         [HttpPost]
-        public ActionResult InsertMonthly(MonthlyBill monthlyBillInsert)
+        public bool InsertMonthly(MonthlyBill monthlyBillInsert)
         {
             var mgr = new GetBills();
             mgr.InsertMonthly(monthlyBillInsert);
-            return RedirectToAction("Index");
+            return true;
+            //return RedirectToAction("Index");
         }
 
 

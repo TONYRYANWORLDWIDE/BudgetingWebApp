@@ -78,6 +78,7 @@
                 </td>
                 <td>
                     <a class="Update" href="javascript:;">Update</a>
+                    <a class="Delete" href="javascript:;">Delete</a>
                 </td>
             </tr>
         }
@@ -350,6 +351,33 @@
                 url: '@Url.Action("UpdateMonthly", "Monthly")',
                 method: 'POST',
                 data: { monthlyBill: monthlyBill },
+                success: function (response) {
+
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }
+        });
+    });
+
+
+
+        $("body").on("click", "#MonthlyBillsTable .Delete", function () {
+
+        var row = $(this).closest("tr");
+        //var monthlyBill = {}
+
+        var id = row.find(".id").find('input').val();
+
+            //monthlyBill.id = id;
+            console.log(id);
+
+
+
+            $.ajax({
+                url: '@Url.Action("DeleteMonthly", "Monthly")',
+                method: 'POST',
+                data: { id: id },
                 success: function (response) {
 
                 },

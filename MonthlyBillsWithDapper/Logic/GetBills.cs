@@ -59,12 +59,22 @@ namespace MonthlyBillsWithDapper.Logic
             parameters.Add("id", monthlyBill.id);
             parameters.Add("Bill", monthlyBill.Bill);
             parameters.Add("Cost", monthlyBill.Cost);
-            parameters.Add("Date", monthlyBill.Date);
-            
+            parameters.Add("Date", monthlyBill.Date);         
             var procResponse = new Instance<dynamic>().Execute("dbo.updateMonthlyBills", parameters);
             if (procResponse != null)
                 return true;
             return false; 
+        }
+
+
+        public bool DeleteMonthly(int id)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("id", id);
+            var procResponse = new Instance<dynamic>().Execute("dbo.deleteMonthlyBills", parameters);
+            if (procResponse != null)
+                return true;
+            return false;
         }
 
         public bool InsertMonthly(MonthlyBill monthlyBill)
@@ -73,6 +83,8 @@ namespace MonthlyBillsWithDapper.Logic
             parameters.Add("Bill", monthlyBill.Bill);
             parameters.Add("Cost", monthlyBill.Cost);
             parameters.Add("Date", monthlyBill.Date);
+            parameters.Add("UserID", "a5ca7194-40f8-4d8e-81ed-d56e7338317f"); // TODO use ASP User once login added
+
             var procResponse = new Instance<dynamic>().Execute("dbo.insertMonthlyBills", parameters);
             if (procResponse != null)
                 return true;
