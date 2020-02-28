@@ -5,7 +5,7 @@
 </h1>
 
 
-<a class="Create" href="javascript:;">Create</a>
+
 
 
 
@@ -272,46 +272,7 @@
 
 
 
-    $("#CreateMonthlyBillForm").validate({
-
-        rules: {
-            Date: {
-                    required: true,
-                    range: [1, 31]
-            }
-        }
-    });
-    $(".Create").on("click", function () {
-
-        $("#CreateMonthlyBillForm").toggle();
-
-    });
-
-        $("#submitNewMonthlyBill").click(function () {
-            var mb = $("form").serializeArray();
-            console.log(mb);
-            var monthlyBillInsert = {}
-            var Bill = mb[0].value;
-            monthlyBillInsert.Bill = Bill
-            var Cost = mb[1].value;
-            monthlyBillInsert.Cost = Cost
-            var Date = mb[2].value;
-            monthlyBillInsert.Date = Date
-
-            $.ajax({
-                url: '@Url.Action("InsertMonthly", "Monthly")',
-                method: 'POST',
-                data: { monthlyBillInsert: monthlyBillInsert },
-                success: function (response) {
-                    $("#CreateMonthlyBillForm").trigger("reset");
-                    $("#CreateMonthlyBillForm").toggle();
-                     $('#PartialMonthly').html(response);
-                },
-                error: function () {
-                    alert("Sorry, there's been an error.");
-                }
-            });
-        });
+   
 
     $("body").on("click", "#MonthlyBillsTable .Update", function () {
 
