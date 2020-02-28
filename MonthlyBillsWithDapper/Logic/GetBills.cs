@@ -34,6 +34,14 @@ namespace MonthlyBillsWithDapper.Logic
             return weeklyBills;
         }
 
+        public List<BringHome> getBringHome(string ASPUser)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("ASPUser", ASPUser);
+            var bringhome = new Instance<BringHome>().Execute("dbo.getBringHome", parameters).ToList();
+            return bringhome;
+        }
+
 
         public BankBalance getBankBalance(string ASPUser)
         {
