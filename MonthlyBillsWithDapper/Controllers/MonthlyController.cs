@@ -19,6 +19,7 @@ namespace MonthlyBillsWithDapper.Controllers
             model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
             model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
             model.TheUpcomingBills = mgr.getUpcomingBills(ASPUser);
+            model.bankBalance = mgr.getBankBalance(ASPUser);
             return View(model);
         }
 

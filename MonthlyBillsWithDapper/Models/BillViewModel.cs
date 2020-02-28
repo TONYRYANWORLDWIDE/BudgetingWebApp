@@ -15,11 +15,13 @@ namespace MonthlyBillsWithDapper.Models
             TheUpcomingBills = new List<UpcomingBill>();
             MonthlyBills = new List<MonthlyBill>();
             WeeklyBills = new List<WeeklyBill>();
+            bankBalance = new BankBalance();
         }
 
         public List<UpcomingBill> TheUpcomingBills { get; set; }
         public List<MonthlyBill> MonthlyBills { get; set; }
         public List<WeeklyBill> WeeklyBills {get;set;}
+        public BankBalance bankBalance { get; set; }
 
 
     }

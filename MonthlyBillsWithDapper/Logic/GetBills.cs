@@ -34,6 +34,17 @@ namespace MonthlyBillsWithDapper.Logic
             return weeklyBills;
         }
 
+
+        public BankBalance getBankBalance(string ASPUser)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("ASPUser", ASPUser);
+            var BankBalance = new Instance<BankBalance>().Execute("dbo.getBankBalance", parameters).FirstOrDefault();
+            return BankBalance;
+        }
+
+
+
         public bool UpdateMonthly(MonthlyBill monthlyBill)
         {
             DynamicParameters parameters = new DynamicParameters();
