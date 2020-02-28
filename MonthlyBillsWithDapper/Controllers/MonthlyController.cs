@@ -17,6 +17,8 @@ namespace MonthlyBillsWithDapper.Controllers
             var model = new BillsViewModel();
             var mgr = new GetBills();
             model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
+            model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
+            model.TheUpcomingBills = mgr.getUpcomingBills(ASPUser);
             return View(model);
         }
 
@@ -32,5 +34,6 @@ namespace MonthlyBillsWithDapper.Controllers
             mgr.InsertMonthly(monthlyBillInsert);
             return RedirectToAction("Index");
         }
+
     }
 }

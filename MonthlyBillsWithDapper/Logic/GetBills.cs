@@ -26,6 +26,14 @@ namespace MonthlyBillsWithDapper.Logic
             return monthlyBills;
         }
 
+        public List<WeeklyBill> getWeeklyBills(string ASPUser)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("ASPUser", ASPUser);
+            var weeklyBills = new Instance<WeeklyBill>().Execute("dbo.getWeeklyBills", parameters).ToList();
+            return weeklyBills;
+        }
+
         public bool UpdateMonthly(MonthlyBill monthlyBill)
         {
             DynamicParameters parameters = new DynamicParameters();

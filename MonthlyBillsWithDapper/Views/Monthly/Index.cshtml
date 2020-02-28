@@ -19,9 +19,12 @@
 
 <div id="tabs" style="width:300px">
     <ul>
-        <li><a href="#tabs-1">Tab 1</a></li>
-        <li><a href="#tabs-2">Tab 2</a></li>
-        <li><a href="#tabs-3">Tab 3</a></li>
+        @*<li><a href="#tabs-1">Tab 1</a></li>
+        <li><a href="#tabs-2">Tab 2</a></li>*@
+        <li><button type="button" id="MonthlyBillsButton">Monthly Bills</button></li>
+       <p></p>
+        <li><button type="button" id="WeeklyBillsButton">Weekly Bills</button></li>
+        @*<li><button type="button" id="MonthlyBIlls">Monthly Bills</button></li>*@
     </ul>
 </div>
     <table id="MonthlyBillsTable" class="table">
@@ -97,6 +100,19 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script type="text/javascript">
+
+
+        $("#MonthlyBillsButton").click(function () {
+            $("#MonthlyBillsTable").show();
+            $("#WeeklyBillsTable").hide();
+        });
+
+        $("#WeeklyBillsButton").click(function () {
+            $("#MonthlyBillsTable").hide();
+            $("#WeeklyBillsTable").show();
+        });
+
+
 
     $("#CreateMonthlyBillForm").validate({
 
