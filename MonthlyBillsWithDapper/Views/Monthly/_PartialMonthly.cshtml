@@ -1,0 +1,37 @@
+﻿@model MonthlyBillsWithDapper.Models.BillsViewModel
+
+<table id="MonthlyBillsTablePartial" class="table">
+    <thead>
+        <tr>
+            <th class="TJR_th_Hidden"></th>
+            <th>Bill</th>
+            <th>Cost</th>
+            <th>Day</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var monthlyBills in Model.MonthlyBills)
+        {
+            <tr>
+                <td class="id">
+                    @Html.HiddenFor(modelItem => monthlyBills.id, new { htmlAttributes = new { @class = "form-control id" } })
+                </td>
+
+                <td class="Bill">
+                    @Html.EditorFor(modelItem => monthlyBills.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })
+                </td>
+                <td class="Cost">
+                    @Html.EditorFor(modelItem => monthlyBills.Cost, new { htmlAttributes = new { @class = "form-control Cost" } })
+                </td>
+                <td class="Date">
+                    @Html.EditorFor(modelItem => monthlyBills.Date, new { htmlAttributes = new { @class = "form-control Date" } })
+                </td>
+                <td>
+                    <a class="Update" href="javascript:;">Update</a>
+                    <a class="Delete" href="javascript:;">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

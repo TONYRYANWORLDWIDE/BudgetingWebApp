@@ -53,5 +53,15 @@ namespace MonthlyBillsWithDapper.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public PartialViewResult PartialMonthly()
+        {
+            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
+            var model = new BillsViewModel();
+            var mgr = new GetBills();
+            model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
+            return PartialView("_PartialMonthly", model);
+        }
+
     }
 }
