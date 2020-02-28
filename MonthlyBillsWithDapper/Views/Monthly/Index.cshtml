@@ -5,10 +5,6 @@
 </h1>
 
 
-
-
-
-
 <div class="grid-container-balance">
     <span class="DisplayBalance">
         @Html.DisplayFor(m => m.bankBalance.KeyBalance)
@@ -30,22 +26,6 @@
     </div>
 
 </div>
-
-
-<form id="CreateMonthlyBillForm">
-
-     <span class="Bill">Bill:</span>  
-     <input type="text" name="Bill" required>
-
-    <span class="Cost">Cost: </span>
-    <input type="text" name="Cost" required>
-
-    <span class="Date">Date: </span>
-    <input type="text" name="Date" id="Date" required>
-
-    <button type="button" id="submitNewMonthlyBill">Submit</button>
-</form>
-
 
 
 <div id="PartialMonthly"></div>
