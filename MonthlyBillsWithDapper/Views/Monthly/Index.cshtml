@@ -283,39 +283,28 @@
         $("#submitNewMonthlyBill").click(function () {
             var mb = $("form").serializeArray();
             console.log(mb);
-
-
-
             var monthlyBillInsert = {}
-
             var Bill = mb[0].value;
             monthlyBillInsert.Bill = Bill
-
             var Cost = mb[1].value;
             monthlyBillInsert.Cost = Cost
-
             var Date = mb[2].value;
             monthlyBillInsert.Date = Date
-
-
 
             $.ajax({
                 url: '@Url.Action("InsertMonthly", "Monthly")',
                 method: 'POST',
                 data: { monthlyBillInsert: monthlyBillInsert },
                 success: function (response) {
-
                     $("#CreateMonthlyBillForm").trigger("reset");
                     $("#CreateMonthlyBillForm").toggle();
                     alert("submitted");
-
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");
                 }
             });
         });
-
 
     $("body").on("click", "#MonthlyBillsTable .Update", function () {
 
