@@ -23,24 +23,16 @@ namespace MonthlyBillsWithDapper.Controllers
         [HttpPost]
         public bool InsertBringHome(BringHome bringHome)
         {
-            //string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
             var bh = new BringHomeLogic();
             bh.InsertBringHome(bringHome);
-            //var model = new BillsViewModel();
-            //model.BringHomes = bh.getBringHome(ASPUser);
-            //return PartialView("_PartialBringHome", model);
             return true;
         }
 
-
-        public PartialViewResult DeleteBringHome(int id)
+        public bool DeleteBringHome(int id)
         {
-            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
             var bh = new BringHomeLogic();
             bh.DeleteBringHome(id);
-            var model = new BillsViewModel();
-            model.BringHomes = bh.getBringHome(ASPUser);
-            return PartialView("_PartialBringHome", model);
+            return true;
         }
     }
 }

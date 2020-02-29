@@ -144,7 +144,16 @@
             success: function (response) {
 
                 alert("Delete Bring Home");
-                $('#PartialBringHome').html(response);
+                   $.ajax({
+                        url: '/BringHome/PartialBringHome',
+                        success: function (response) {
+                            $("#PartialBringHome").html(response);
+                        },
+                        error : function() {
+                            alert("Error on embeeded ajax");
+                        }
+                        
+                    });
             },
 
             error: function () {
