@@ -73,7 +73,7 @@ namespace MonthlyBillsWithDapper.Logic
             parameters.Add("Bill", weeklyBill.Bill);
             parameters.Add("Cost", weeklyBill.Cost);
             parameters.Add("DayOfWeek", weeklyBill.DayOfWeek);
-            var procResponse = new Instance<dynamic>().Execute("dbo.updateweeklyBills", parameters);
+            var procResponse = new Instance<dynamic>().Execute("dbo.updateWeeklyBills", parameters);
             if (procResponse != null)
                 return true;
             return false;

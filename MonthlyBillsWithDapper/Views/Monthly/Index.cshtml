@@ -190,7 +190,6 @@
     $("#WeeklyBillsButton").click(function () {
                 $("#PartialMonthly").hide();
                 $("#PartialWeekly").show();
-                //$("#MonthlyBillsTable").hide();
                 $("#BringHomeBillsTable").hide();
                 $("#UpcomingBillsTable").hide();
                 $(this).addClass("colorButton")
@@ -217,7 +216,7 @@
                 //$("#MonthlyBillsTable").hide();
                 $("#PartialMonthly").hide();
                 $("#BringHomeBillsTable").hide();
-                $("#WeeklyBillsTable").hide();
+                 $("#PartialWeekly").hide();
                 $(this).addClass("colorButton")
                 $("#MonthlyBillsButton").removeClass("colorButton")
                 $("#WeeklyBillsButton").removeClass("colorButton")
@@ -231,20 +230,16 @@
         var monthlyBill = {}
 
         var id = row.find(".id").find('input').val();
-
         monthlyBill.id = id;
 
         var bill = row.find(".Bill").find('input').val();
         monthlyBill.bill = bill;
-        console.log(bill);
 
         var cost = row.find(".Cost").find('input').val();
         monthlyBill.Cost = cost;
-        console.log(cost);
 
         var date= row.find(".Date").find('input').val();
         monthlyBill.Date = date;
-        console.log(date);
 
             $.ajax({
                 url: '@Url.Action("UpdateMonthly", "Monthly")',
@@ -263,14 +258,8 @@
         $("body").on("click", "#MonthlyBillsTable .Delete", function () {
 
         var row = $(this).closest("tr");
-        //var monthlyBill = {}
-
         var id = row.find(".id").find('input').val();
-
-            //monthlyBill.id = id;
-            console.log(id);
-
-
+         console.log(id);
 
             $.ajax({
                 url: '@Url.Action("DeleteMonthly", "Monthly")',

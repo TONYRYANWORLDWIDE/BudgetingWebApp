@@ -54,8 +54,6 @@ namespace MonthlyBillsWithDapper.Controllers
             return PartialView("_PartialMonthly", model);
         }
 
-
-
         public PartialViewResult Deleteweekly(int id)
         {
             string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
