@@ -3,6 +3,7 @@
 
 <a class="CreateWeekly" href="javascript:;">Create</a>
 
+<p>Date: <input class="datepicker" type="text" id="datepicker"></p>
 
 <form id="CreateWeeklyBillForm">
 
@@ -67,7 +68,21 @@
     //                range: [1, 31]
     //        }
     //    }
-    //});
+
+
+        //$('.month').datepicker({
+        //format: 'MM/YYYY',
+        //viewMode: 'months',
+        //minDate: moment().format("MMM YYYY"),
+        //defaultDate: moment(new Date())
+        //});
+
+
+        //$('.month').on('change change.datepicker', function (e) {
+        //console.log("pick your nose")
+        //});
+
+
     
     $(".CreateWeekly").on("click", function () {
 
@@ -121,6 +136,10 @@
             }
             });
          });
+
+    $("#datepicker").click(function () {
+        datepicker();
+    });
 
      $(".UpdateWeekly").click(function () {
 
