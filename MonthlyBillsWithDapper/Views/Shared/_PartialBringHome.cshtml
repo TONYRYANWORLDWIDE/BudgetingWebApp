@@ -17,6 +17,8 @@
     <span class="Frequency">Frequency</span>
     @Html.DropDownList("Frequency", new SelectList(Enum.GetValues(typeof(Entity.Frequency))), new { @class = "FrequencySelector" })
 
+    <span class="PickOnePayDate">PickOnePayDate</span>
+    <input class="datepicker" type="date" id="datepicker">
 
     <button type="button" id="submitNewBringHome">Submit</button>
 </form>
@@ -70,6 +72,11 @@
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
 <script type="text/javascript">
 
+
+
+
+    //$(".datepicker").datepicker();
+
     $(".CreateBringHome").on("click", function () {
 
         $("#CreateBringHomeForm").toggle();
@@ -80,26 +87,34 @@
             var bh = $("#CreateBringHomeForm").serializeArray();
             console.log(bh);
             var bringHome = {}
+
             var Name = bh[0].value;
             bringHome.Name = Name
+
             var amount = bh[1].value;
             bringHome.amount = amount
+
             var DayOfWeek = bh[2].value;
             bringHome.DayOfWeek = DayOfWeek
 
-            @*$.ajax({
-                    url: '@Url.Action("InsertWeekly", "Monthly")',
+            var Frequency = bh[3].value;
+            bringHome.Frequency = Frequency;
+
+            bringHome.PickOnePayDate = $(".datepicker").val();
+            $.ajax({
+                    url: '@Url.Action("InsertBringHome", "BringHome")',
                     method: 'POST',
-                    data: { weeklyBillInsert: weeklyBillInsert },
+                    data: { bringHome: bringHome },
                     success: function (response) {
-                        $("#CreateWeeklyBillForm").trigger("reset");
-                        $("#CreateWeeklyBillForm").toggle();
-                        $('#PartialWeekly').html(response);
-                        alert("Submit New weekly");
+                        $("#CreateBringHomeForm").trigger("reset");
+                        $("#CreateBringHomeForm").toggle();
+                        //$('#PartialBringHome').html(response);
+
                         },
                         error: function () {
                             alert("Sorry, there's been an error.");
                         }
-            });*@
+            });
         });
 </script>
+

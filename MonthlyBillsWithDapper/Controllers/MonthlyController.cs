@@ -16,11 +16,12 @@ namespace MonthlyBillsWithDapper.Controllers
             string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";   //testing
             var model = new BillsViewModel();
             var mgr = new GetBills();
+            var bh = new BringHomeLogic();
             model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
             model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
             model.TheUpcomingBills = mgr.getUpcomingBills(ASPUser);
             model.bankBalance = mgr.getBankBalance(ASPUser);
-            model.BringHomes = mgr.getBringHome(ASPUser);
+            model.BringHomes = bh.getBringHome(ASPUser);
             return View(model);
         }
 
@@ -114,13 +115,6 @@ namespace MonthlyBillsWithDapper.Controllers
         }
 
 
-        public PartialViewResult PartialBringHome()
-        {
-            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
-            var model = new BillsViewModel();
-            var mgr = new GetBills();
-            model.BringHomes = mgr.getBringHome(ASPUser);
-            return PartialView("_PartialBringHome", model);
-        }
+
     }
 }

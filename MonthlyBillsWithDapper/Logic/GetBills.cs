@@ -34,15 +34,6 @@ namespace MonthlyBillsWithDapper.Logic
             return weeklyBills;
         }
 
-        public List<BringHome> getBringHome(string ASPUser)
-        {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("ASPUser", ASPUser);
-            var bringhome = new Instance<BringHome>().Execute("dbo.getBringHome", parameters).ToList();
-            return bringhome;
-        }
-
-
         public BankBalance getBankBalance(string ASPUser)
         {
             DynamicParameters parameters = new DynamicParameters();
@@ -50,8 +41,6 @@ namespace MonthlyBillsWithDapper.Logic
             var BankBalance = new Instance<BankBalance>().Execute("dbo.getBankBalance", parameters).FirstOrDefault();
             return BankBalance;
         }
-
-
 
         public bool UpdateMonthly(MonthlyBill monthlyBill)
         {
@@ -79,7 +68,6 @@ namespace MonthlyBillsWithDapper.Logic
             return false;
         }
 
-
         public bool DeleteMonthly(int id)
         {
             DynamicParameters parameters = new DynamicParameters();
@@ -89,7 +77,6 @@ namespace MonthlyBillsWithDapper.Logic
                 return true;
             return false;
         }
-
 
         public bool DeleteWeekly(int id)
         {
@@ -126,6 +113,8 @@ namespace MonthlyBillsWithDapper.Logic
                 return true;
             return false;
         }
+
+
 
 
     }
