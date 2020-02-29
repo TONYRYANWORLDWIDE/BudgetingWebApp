@@ -10,7 +10,7 @@ namespace MonthlyBillsWithDapper.Entity
     {
         public int id { get; set; }
         public string Name { get; set; }
-        public Nullable<float> amount { get; set; }
+        public float amount { get; set; }
         public string DayOfWeek { get; set; }
         public string Frequency { get; set; }
         [DataType(DataType.Date)]

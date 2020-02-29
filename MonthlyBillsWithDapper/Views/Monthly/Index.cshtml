@@ -30,51 +30,8 @@
 
 <div id="PartialMonthly"></div>
 
+<div id="PartialBringHome"></div>
 
-<table id="BringHomeBillsTable" class="table">
-    <thead>
-        <tr>
-            <th class="TJR_th_Hidden"></th>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Day Of Week</th>
-            <th>Frequency</th>
-            <th>Pay Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var bringhome in Model.BringHomes)
-        {
-            <tr>
-                <td class="id">
-                    @Html.HiddenFor(modelItem => bringhome.id, new { htmlAttributes = new { @class = "form-control id" } })
-                </td>
-
-                <td class="Name">
-                    @Html.EditorFor(modelItem => bringhome.Name, new { htmlAttributes = new { @class = "form-control Bill" } })
-                </td>
-                <td class="amount">
-                    @Html.EditorFor(modelItem => bringhome.amount, new { htmlAttributes = new { @class = "form-control Cost" } })
-                </td>
-                <td class="DayOfWeek">
-                    @Html.EditorFor(modelItem => bringhome.DayOfWeek, new { htmlAttributes = new { @class = "form-control Date" } })
-                </td>
-                <td class="DayOfWeek">
-                    @Html.EditorFor(modelItem => bringhome.Frequency, new { htmlAttributes = new { @class = "form-control Date" } })
-                </td>
-                <td class="DayOfWeek">
-                    @Html.EditorFor(modelItem => bringhome.PickOnePayDate, new { htmlAttributes = new { @class = "form-control Date" } })
-                </td>
-                <td>
-                    <a class="Update" href="javascript:;">Update</a>
-                </td>
-            </tr>
-
-
-        }
-
-    </tbody>
-</table>
 
 <table id="UpcomingBillsTable" class="table">
     <thead>
@@ -129,7 +86,7 @@
 
     $("document").ready(function () {
         $("#PartialWeekly").hide();
-        $("#BringHomeBillsTable").hide();
+        $("#PartialBringHome").hide();
         $("#PartialMonthly").hide();
     });
 
@@ -140,15 +97,27 @@
 
 
     $("#BringHomeButton").click(function () {
-        $("#BringHomeBillsTable").show();
-        //$("#MonthlyBillsTable").hide();
+        $("#PartialBringHome").show();
         $("#PartialMonthly").hide();
-            $("#PartialWeekly").hide();
-            $("#UpcomingBillsTable").hide();
-            $(this).addClass("colorButton")
-            $("#WeeklyBillsButton").removeClass("colorButton")
-            $("#UpcomingBillsButton").removeClass("colorButton")
-            $("#MonthlyBillsButton").removeClass("colorButton")
+        $("#PartialWeekly").hide();
+        $("#UpcomingBillsTable").hide();
+        $(this).addClass("colorButton")
+        $("#WeeklyBillsButton").removeClass("colorButton")
+        $("#UpcomingBillsButton").removeClass("colorButton")
+        $("#MonthlyBillsButton").removeClass("colorButton")
+
+            $.ajax({
+
+                url: '@Url.Action("PartialBringHome","Monthly")',
+                method: 'Get',
+                success: function (response) {
+
+                    $('#PartialBringHome').html(response);
+                },
+                error: function () {
+                    alert("Sorry, there's been an error. Partial BringHome");
+                }
+            });
         });
 
 
@@ -156,7 +125,7 @@
             $("#PartialMonthly").show();
             $("#PartialWeekly").hide();
             $("#UpcomingBillsTable").hide();
-            $("#BringHomeBillsTable").hide();
+            $("#PartialBringHome").hide();
             $(this).addClass("colorButton")
             $("#WeeklyBillsButton").removeClass("colorButton")
             $("#UpcomingBillsButton").removeClass("colorButton")

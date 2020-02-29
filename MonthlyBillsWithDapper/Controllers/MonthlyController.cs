@@ -112,5 +112,15 @@ namespace MonthlyBillsWithDapper.Controllers
             model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
             return PartialView("_PartialWeekly", model);
         }
+
+
+        public PartialViewResult PartialBringHome()
+        {
+            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
+            var model = new BillsViewModel();
+            var mgr = new GetBills();
+            model.BringHomes = mgr.getBringHome(ASPUser);
+            return PartialView("_PartialBringHome", model);
+        }
     }
 }
