@@ -21,14 +21,15 @@ namespace MonthlyBillsWithDapper.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult InsertBringHome(BringHome bringHome)
+        public bool InsertBringHome(BringHome bringHome)
         {
-            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
+            //string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
             var bh = new BringHomeLogic();
             bh.InsertBringHome(bringHome);
-            var model = new BillsViewModel();
-            model.BringHomes = bh.getBringHome(ASPUser);
-            return PartialView("_PartialBringHome", model);
+            //var model = new BillsViewModel();
+            //model.BringHomes = bh.getBringHome(ASPUser);
+            //return PartialView("_PartialBringHome", model);
+            return true;
         }
 
 
