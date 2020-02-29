@@ -106,15 +106,26 @@
                     url: '@Url.Action("InsertBringHome", "BringHome")',
                     method: 'POST',
                     data: { bringHome: bringHome },
-                    success: function (response) {
-                        $("#CreateBringHomeForm").trigger("reset");
-                        $("#CreateBringHomeForm").toggle();
-                        //$('#PartialBringHome').html(response);
+                success: function (response) {
+                    $("#CreateBringHomeForm").trigger("reset");
+                    $("#CreateBringHomeForm").toggle();
+                    //$('#PartialBringHome').html(response);
 
+                    $.ajax({
+                        url: '/BringHome/PartialBringHome',
+                        success: function (response) {
+                            $("#PartialBringHome").html(response);
                         },
-                        error: function () {
-                            alert("Sorry, there's been an error.");
+                        error : function() {
+                            alert("Error on embeeded ajax");
                         }
+                        
+                    });
+
+                    },
+                    error: function () {
+                        alert("Sorry, there's been an error.");
+                    }
             });
         });
 
