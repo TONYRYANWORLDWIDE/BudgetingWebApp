@@ -134,31 +134,7 @@
     });
 
 
-    $.ajax({
 
-        url: '@Url.Action("PartialMonthly","Monthly")',
-        method: 'Get',
-        success: function (response) {
-
-            $('#PartialMonthly').html(response);
-        },
-        error: function () {
-            alert("Sorry, there's been an error. Partial Monthly");
-        }
-    });
-
-        $.ajax({
-
-        url: '@Url.Action("PartialWeekly","Monthly")',
-        method: 'Get',
-        success: function (response) {
-
-            $('#PartialWeekly').html(response);
-        },
-        error: function () {
-            alert("Sorry, there's been an error. Partial Monthly");
-        }
-    });
 
 
 
@@ -185,18 +161,43 @@
             $("#WeeklyBillsButton").removeClass("colorButton")
             $("#UpcomingBillsButton").removeClass("colorButton")
             $("#BringHomeButton").removeClass("colorButton")
+
+                $.ajax({
+
+                    url: '@Url.Action("PartialMonthly","Monthly")',
+                    method: 'Get',
+                    success: function (response) {
+
+                        $('#PartialMonthly').html(response);
+                    },
+                    error: function () {
+                        alert("Sorry, there's been an error. Partial Monthly");
+                    }
+                });
         });
 
     $("#WeeklyBillsButton").click(function () {
-                $("#PartialMonthly").hide();
-                $("#PartialWeekly").show();
-                $("#BringHomeBillsTable").hide();
-                $("#UpcomingBillsTable").hide();
-                $(this).addClass("colorButton")
-                $("#MonthlyBillsButton").removeClass("colorButton")
-                $("#UpcomingBillsButton").removeClass("colorButton")
-                $("#BringHomeButton").removeClass("colorButton")
-            });
+        $("#PartialMonthly").hide();
+        $("#PartialWeekly").show();
+        $("#BringHomeBillsTable").hide();
+        $("#UpcomingBillsTable").hide();
+        $(this).addClass("colorButton")
+        $("#MonthlyBillsButton").removeClass("colorButton")
+        $("#UpcomingBillsButton").removeClass("colorButton")
+        $("#BringHomeButton").removeClass("colorButton")
+
+        $.ajax({
+
+            url: '@Url.Action("PartialWeekly","Monthly")',
+            method: 'Get',
+            success: function (response) {
+                $('#PartialWeekly').html(response);
+            },
+            error: function () {
+                alert("Sorry, there's been an error. Partial Monthly");
+            }
+        });
+    });     
 
 
     $("#UpcomingBillsButton").click(function () {
@@ -206,14 +207,14 @@
             url: '@Url.Action("Index", "Monthly")',
             method: 'Get',
             success: function (response) {
-                //location.reload();
-                },
-                error: function () {
-                    alert("Sorry, there's been an error.");
-                }
-        })
+
+            },
+            error: function () {
+                alert("Sorry, there's been an error.");
+            }
+        });
+
                 $("#UpcomingBillsTable").show();
-                //$("#MonthlyBillsTable").hide();
                 $("#PartialMonthly").hide();
                 $("#BringHomeBillsTable").hide();
                  $("#PartialWeekly").hide();
@@ -221,41 +222,10 @@
                 $("#MonthlyBillsButton").removeClass("colorButton")
                 $("#WeeklyBillsButton").removeClass("colorButton")
                 $("#BringHomeButton").removeClass("colorButton")
-            });
-   
-
-    $("body").on("click", "#MonthlyBillsTable .Update", function () {
-
-        var row = $(this).closest("tr");
-        var monthlyBill = {}
-
-        var id = row.find(".id").find('input').val();
-        monthlyBill.id = id;
-
-        var bill = row.find(".Bill").find('input').val();
-        monthlyBill.bill = bill;
-
-        var cost = row.find(".Cost").find('input').val();
-        monthlyBill.Cost = cost;
-
-        var date= row.find(".Date").find('input').val();
-        monthlyBill.Date = date;
-
-            $.ajax({
-                url: '@Url.Action("UpdateMonthly", "Monthly")',
-                method: 'POST',
-                data: { monthlyBill: monthlyBill },
-                success: function (response) {
-                    $('#PartialMonthly').html(response);
-                    alert("Updated");
-                },
-                error: function () {
-                    alert("Sorry, there's been an error.");
-                }
-        });
     });
 
-        $("body").on("click", "#MonthlyBillsTable .Delete", function () {
+
+        $(".DeleteMonthly").click(function () {
 
         var row = $(this).closest("tr");
         var id = row.find(".id").find('input').val();
@@ -266,7 +236,7 @@
                 method: 'POST',
                 data: { id: id },
                 success: function (response) {
-                                $('#PartialMonthly').html(response);
+                       $('#PartialMonthly').html(response);
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");

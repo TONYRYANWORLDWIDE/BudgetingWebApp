@@ -36,7 +36,6 @@
                 <td class="id">
                     @Html.HiddenFor(modelItem => weeklybill.id, new { htmlAttributes = new { @class = "form-control id" } })
                 </td>
-
                 <td class="Bill">
                     @Html.EditorFor(modelItem => weeklybill.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })
                 </td>
@@ -47,8 +46,8 @@
                     @Html.EditorFor(modelItem => weeklybill.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
                 </td>
                 <td>
-                    <a class="Update" href="javascript:;">Update</a>
-                    <a class="Delete" href="javascript:;">Delete</a>
+                    <a class="UpdateWeekly" href="javascript:;">Update</a>
+                    <a class="DeleteWeekly" href="javascript:;">Delete</a>
                 </td>
             </tr>
         }
@@ -69,6 +68,8 @@
     //        }
     //    }
     //});
+
+
     $(".CreateWeekly").on("click", function () {
 
         $("#CreateWeeklyBillForm").toggle();
@@ -93,7 +94,8 @@
                 success: function (response) {
                     $("#CreateWeeklyBillForm").trigger("reset");
                     $("#CreateWeeklyBillForm").toggle();
-                     $('#PartialWeekly').html(response);
+                    $('#PartialWeekly').html(response);
+                    alert("Submit New weekly");
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");
@@ -102,7 +104,31 @@
         });
 
 
-          $("body").on("click", "#WeeklyBillsTable .Update", function () {
+       
+
+         $(".DeleteWeekly").click(function() {
+
+        var row = $(this).closest("tr");
+        var id = row.find(".id").find('input').val();
+
+        $.ajax({
+            url: '@Url.Action("DeleteWeekly", "Monthly")',
+            method: 'POST',
+            data: { id: id },
+            success: function (response) {
+
+                $('#PartialWeekly').html(response);
+                alert("Delete Weekly");
+            },
+            error: function () {
+                alert("Sorry, there's been an error.");
+            }
+            });
+         });
+
+
+
+     $(".UpdateWeekly").click(function () {
 
         var row = $(this).closest("tr");
         var weeklyBill = {}
@@ -121,6 +147,7 @@
 
         var dayOfWeek= row.find(".DayOfWeek").find('input').val();
         weeklyBill.DayOfWeek = dayOfWeek;
+        console.log(dayOfWeek);
 
 
             $.ajax({
@@ -128,33 +155,16 @@
                 method: 'POST',
                 data: { weeklyBill: weeklyBill },
                 success: function (response) {
-                    alert("Updated Weekly");
-                    $('#PartialWeekly').html(response);
-                    
+
+                       alert("Updated Weekly");
+ 
+                    //$('#PartialWeekly').html(response);                    
                 },
                 error: function () {
                     alert("Sorry, there's been an error with weekly.");
                 }
             });
           });
-
-        $("body").on("click", "#WeeklyBillsTable .Delete", function () {
-
-        var row = $(this).closest("tr");
-        var id = row.find(".id").find('input').val();
-
-        $.ajax({
-            url: '@Url.Action("DeleteWeekly", "Monthly")',
-            method: 'POST',
-            data: { id: id },
-            success: function (response) {
-                $('#PartialWeekly').html(response);
-            },
-            error: function () {
-                alert("Sorry, there's been an error.");
-            }
-            });
-        });
 
 
 </script>

@@ -47,8 +47,8 @@
                     @Html.EditorFor(modelItem => monthlyBills.Date, new { htmlAttributes = new { @class = "form-control Date" } })
                 </td>
                 <td>
-                    <a class="Update" href="javascript:;">Update</a>
-                    <a class="Delete" href="javascript:;">Delete</a>
+                    <a class="UpdateMonthly" href="javascript:;">Update</a>
+                    <a class="DeleteMonthly" href="javascript:;">Delete</a>
                 </td>
             </tr>
         }
@@ -101,6 +101,39 @@
                 }
             });
         });
+
+
+
+        $(".UpdateMonthly").click(function () {
+
+        var row = $(this).closest("tr");
+        var monthlyBill = {}
+
+        var id = row.find(".id").find('input').val();
+        monthlyBill.id = id;
+
+        var bill = row.find(".Bill").find('input').val();
+        monthlyBill.bill = bill;
+
+        var cost = row.find(".Cost").find('input').val();
+        monthlyBill.Cost = cost;
+
+        var date= row.find(".Date").find('input').val();
+        monthlyBill.Date = date;
+
+            $.ajax({
+                url: '@Url.Action("UpdateMonthly", "Monthly")',
+                method: 'POST',
+                data: { monthlyBill: monthlyBill },
+                success: function (response) {
+                    $('#PartialMonthly').html(response);
+                    alert("Updated");
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }
+        });
+    });
 
 
 </script>

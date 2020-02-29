@@ -11,9 +11,9 @@ namespace MonthlyBillsWithDapper.Controllers
 {
     public class MonthlyController : Controller
     {
-        public IActionResult Index(string ASPUser)
+        public IActionResult Index()
         {
-            ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";   //testing
+            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";   //testing
             var model = new BillsViewModel();
             var mgr = new GetBills();
             model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
