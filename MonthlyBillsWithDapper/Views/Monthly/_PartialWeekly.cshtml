@@ -44,14 +44,7 @@
                     @Html.EditorFor(modelItem => weeklybill.Cost, new { htmlAttributes = new { @class = "form-control Cost" } })
                 </td>
                 <td class="DayOfWeek">
-                    @*@Html.EditorFor(modelItem => weeklybill.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })*@
-                    @Html.DropDownListFor(modelItem => weeklybill.DayOfWeek, new SelectList(Enum.GetValues(typeof(DayOfWeek))), new { @class = "form-control DayOfWeekSelector" })
-                    @*<select id="DayOfWeekSelector" class="mb-3 col-4 form-control">
-
-            <option class="form-control DayOfWeek" value="@weeklybill.DayOfWeek">@weeklybill.DayOfWeek</option>
-
-        </select>*@
-                    @*<select>asp-for="WeeklyBills.DayOfWeek" asp-items="Html.GetEnumSelectList<dayofWeek>()</select>*@
+                    @Html.DropDownListFor(modelItem => weeklybill.DayOfWeek, new SelectList(Enum.GetValues(typeof(Entity.DayOfWeek))), new { @class = "form-control DayOfWeekSelector" })
                 </td>
                 <td>
                     <a class="UpdateWeekly" href="javascript:;">Update</a>
@@ -61,7 +54,6 @@
         }
     </tbody>
 </table>
-
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
@@ -76,8 +68,7 @@
     //        }
     //    }
     //});
-
-
+    
     $(".CreateWeekly").on("click", function () {
 
         $("#CreateWeeklyBillForm").toggle();
@@ -109,10 +100,7 @@
                     alert("Sorry, there's been an error.");
                 }
             });
-        });
-
-
-       
+        });       
 
          $(".DeleteWeekly").click(function() {
 
@@ -134,8 +122,6 @@
             });
          });
 
-
-
      $(".UpdateWeekly").click(function () {
 
         var row = $(this).closest("tr");
@@ -153,13 +139,9 @@
         weeklyBill.Cost = cost;
         console.log(cost);
 
-        //var dayOfWeek= row.find(".DayOfWeek").find('input').val();
-        //var dayOfWeek= row.find("#weeklybill_DayOfWeek")
-         debugger;
-
-         var selectedday = $("select.DayOfWeekSelector").children("option:selected").val();
-             alert(selectedday);
-             console.log(selectedday);
+        var selectedday = $("select.DayOfWeekSelector").children("option:selected").val();
+            alert(selectedday);
+            console.log(selectedday);
 
         weeklyBill.DayOfWeek = selectedday;
 
@@ -178,6 +160,4 @@
                 }
             });
           });
-
-
 </script>
