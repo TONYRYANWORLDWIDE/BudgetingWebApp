@@ -13,7 +13,8 @@
     <input type="text" name="Cost" required>
 
     <span class="Date">Day Of Week: </span>
-    <input type="text" name="DayOfweek" id="DayOfweek" required>
+    @*<input type="text" name="DayOfweek" id="DayOfweek" required>*@
+    @Html.DropDownList("Day", new SelectList(Enum.GetValues(typeof(DayOfWeek))))
 
     <button type="button" id="submitNewWeeklyBill">Submit</button>
 </form>
