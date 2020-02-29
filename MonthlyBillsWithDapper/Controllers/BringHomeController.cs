@@ -36,10 +36,10 @@ namespace MonthlyBillsWithDapper.Controllers
         {
             string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
             var mgr = new BringHomeLogic();
-            mgr.DeleteWeekly(id);
+            mgr.DeleteBringHome(id);
             var model = new BillsViewModel();
-            model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
-            return PartialView("_PartialWeekly", model);
+            model.BringHomes = mgr.getBringHome(ASPUser);
+            return PartialView("_PartialBringHome", model);
         }
     }
 }

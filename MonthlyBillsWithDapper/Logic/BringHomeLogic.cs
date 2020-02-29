@@ -33,5 +33,15 @@ namespace MonthlyBillsWithDapper.Logic
                 return true;
             return false;
         }
+
+        public bool DeleteBringHome(int id)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("id", id);
+            var procResponse = new Instance<dynamic>().Execute("dbo.deleteBringHome", parameters);
+            if (procResponse != null)
+                return true;
+            return false;
+        }
     }
 }
