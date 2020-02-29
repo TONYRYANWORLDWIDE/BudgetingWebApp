@@ -207,16 +207,12 @@
             url: '@Url.Action("Index", "Monthly")',
             method: 'Get',
             success: function (response) {
-
-
                 //location.reload();
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");
                 }
         })
-
-
                 $("#UpcomingBillsTable").show();
                 //$("#MonthlyBillsTable").hide();
                 $("#PartialMonthly").hide();
@@ -227,9 +223,6 @@
                 $("#WeeklyBillsButton").removeClass("colorButton")
                 $("#BringHomeButton").removeClass("colorButton")
             });
-
-
-
    
 
     $("body").on("click", "#MonthlyBillsTable .Update", function () {

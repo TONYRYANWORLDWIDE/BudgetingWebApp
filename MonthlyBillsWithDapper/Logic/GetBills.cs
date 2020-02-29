@@ -66,6 +66,19 @@ namespace MonthlyBillsWithDapper.Logic
             return false; 
         }
 
+        public bool UpdateWeekly(WeeklyBill weeklyBill)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("id", weeklyBill.id);
+            parameters.Add("Bill", weeklyBill.Bill);
+            parameters.Add("Cost", weeklyBill.Cost);
+            parameters.Add("DayOfWeek", weeklyBill.DayOfWeek);
+            var procResponse = new Instance<dynamic>().Execute("dbo.updateweeklyBills", parameters);
+            if (procResponse != null)
+                return true;
+            return false;
+        }
+
 
         public bool DeleteMonthly(int id)
         {

@@ -34,6 +34,16 @@ namespace MonthlyBillsWithDapper.Controllers
             return PartialView("_PartialMonthly", model);
         }
 
+        public PartialViewResult UpdateWeekly(WeeklyBill weeklyBill)
+        {
+            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
+            var mgr = new GetBills();
+            mgr.UpdateWeekly(weeklyBill);
+            var model = new BillsViewModel();
+            model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
+            return PartialView("_PartialWeekly", model);
+        }
+
         public PartialViewResult DeleteMonthly(int id)
         {
             string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f"; 
