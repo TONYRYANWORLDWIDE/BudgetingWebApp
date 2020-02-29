@@ -131,8 +131,9 @@
             method: 'POST',
             data: { id: id },
             success: function (response) {
-                $('#PartialBringHome').html(response);
+
                 alert("Delete Bring Home");
+                $('#PartialBringHome').html(response);
             },
 
             error: function () {

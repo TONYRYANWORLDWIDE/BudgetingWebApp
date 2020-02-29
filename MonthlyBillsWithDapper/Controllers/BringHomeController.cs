@@ -24,10 +24,10 @@ namespace MonthlyBillsWithDapper.Controllers
         public PartialViewResult InsertBringHome(BringHome bringHome)
         {
             string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
-            var mgr = new BringHomeLogic();
-            mgr.InsertBringHome(bringHome);
+            var bh = new BringHomeLogic();
+            bh.InsertBringHome(bringHome);
             var model = new BillsViewModel();
-            model.BringHomes = mgr.getBringHome(ASPUser);
+            model.BringHomes = bh.getBringHome(ASPUser);
             return PartialView("_PartialBringHome", model);
         }
 
@@ -35,10 +35,10 @@ namespace MonthlyBillsWithDapper.Controllers
         public PartialViewResult DeleteBringHome(int id)
         {
             string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
-            var mgr = new BringHomeLogic();
-            mgr.DeleteBringHome(id);
+            var bh = new BringHomeLogic();
+            bh.DeleteBringHome(id);
             var model = new BillsViewModel();
-            model.BringHomes = mgr.getBringHome(ASPUser);
+            model.BringHomes = bh.getBringHome(ASPUser);
             return PartialView("_PartialBringHome", model);
         }
     }
