@@ -14,6 +14,8 @@ namespace MonthlyBillsWithDapper.Controllers
 {
     public class MonthlyController : Controller
     {
+
+
         public string GetUserId()
         {
             string userID;
@@ -52,6 +54,18 @@ namespace MonthlyBillsWithDapper.Controllers
             var mgr = new GetBills();
             mgr.UpdateMonthly(monthlyBill);
             return true;
+
+        }
+
+        public bool UpdateWeekly(WeeklyBill weeklyBill)
+        {
+            string ASPUser = GetUserId();
+            var mgr = new GetBills();
+            mgr.UpdateWeekly(weeklyBill);
+            //var model = new BillsViewModel();
+            //model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
+            //return PartialView("_PartialWeekly", model);
+            return true;
         }
 
         public PartialViewResult DeleteMonthly(int id)
@@ -64,6 +78,17 @@ namespace MonthlyBillsWithDapper.Controllers
             return PartialView("_PartialMonthly", model);
         }
 
+        public PartialViewResult Deleteweekly(int id)
+        {
+            string ASPUser = GetUserId();
+            var mgr = new GetBills();
+            mgr.DeleteWeekly(id);
+            var model = new BillsViewModel();
+            model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
+            return PartialView("_PartialWeekly", model);
+        }
+
+
         [HttpPost]
         public PartialViewResult InsertMonthly(MonthlyBill monthlyBillInsert)
         {
@@ -73,6 +98,17 @@ namespace MonthlyBillsWithDapper.Controllers
             var model = new BillsViewModel();
             model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
             return PartialView("_PartialMonthly", model);
+        }
+
+        [HttpPost]
+        public PartialViewResult InsertWeekly(WeeklyBill weeklyBillInsert)
+        {
+            string ASPUser = GetUserId();
+            var mgr = new GetBills();
+            mgr.InsertWeekly(weeklyBillInsert, ASPUser);
+            var model = new BillsViewModel();
+            model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
+            return PartialView("_PartialWeekly", model);
         }
 
         public ActionResult getUpcoming()
@@ -91,6 +127,17 @@ namespace MonthlyBillsWithDapper.Controllers
             model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
             return PartialView("_PartialMonthly", model);
         }
+
+        public PartialViewResult PartialWeekly()
+        {
+            string ASPUser = GetUserId();
+            var model = new BillsViewModel();
+            var mgr = new GetBills();
+            model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
+            return PartialView("_PartialWeekly", model);
+        }
+
+
 
     }
 }

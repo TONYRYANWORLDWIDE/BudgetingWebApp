@@ -106,7 +106,7 @@
             weeklyBillInsert.DayOfWeek = DayOfWeek
 
             $.ajax({
-                url: '@Url.Action("InsertWeekly", "Weekly")',
+                url: '@Url.Action("InsertWeekly", "Monthly")',
                 method: 'POST',
                 data: { weeklyBillInsert: weeklyBillInsert },
                 success: function (response) {
@@ -127,7 +127,7 @@
         var id = row.find(".id").find('input').val();
 
         $.ajax({
-            url: '@Url.Action("DeleteWeekly", "Weekly")',
+            url: '@Url.Action("DeleteWeekly", "Monthly")',
             method: 'POST',
             data: { id: id },
             success: function (response) {
@@ -164,7 +164,7 @@
         weeklyBill.DayOfWeek = selectedday;
 
             $.ajax({
-                url: '@Url.Action("UpdateWeekly", "Weekly")',
+                url: '@Url.Action("UpdateWeekly", "Monthly")',
                 method: 'POST',
                 data: { weeklyBill: weeklyBill },
                 success: function (response) {
@@ -175,7 +175,7 @@
 
                     $.ajax({
 
-                        url : '@Url.Action("PartialWeekly", "Weekly")'
+                        url : '@Url.Action("PartialWeekly", "Monthly")'
                     })
 
 
