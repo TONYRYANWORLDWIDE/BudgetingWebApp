@@ -3,34 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace MonthlyBillsWithDapper.Logic
 {
-    public class GetUserID
+    public class GetUserID : Controller
     {
 
 
-
-        private string userID;
-
-
-        public  GetUserID()        
+        public  string GetID()        
         {
-  
+            string userID;
             var claimsIdentity = User.Identity as ClaimsIdentity;
-
             var userIdClaim = claimsIdentity.Claims
                 .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
             if (userIdClaim != null)
             {
-                this.userID = userIdClaim.Value;
+                userID = userIdClaim.Value;
             }
             else
             {
-                this.userID = "tempuser";
+                userID = "tempuser";
             }
 
+            return userID;
         }
     }
 }

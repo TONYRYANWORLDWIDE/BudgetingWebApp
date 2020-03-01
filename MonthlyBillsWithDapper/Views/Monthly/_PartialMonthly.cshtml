@@ -131,6 +131,25 @@
                     alert("Sorry, there's been an error.");
                 }
         });
+        });
+
+            $(".DeleteMonthly").click(function () {
+
+        var row = $(this).closest("tr");
+        var id = row.find(".id").find('input').val();
+         console.log(id);
+
+            $.ajax({
+                url: '@Url.Action("DeleteMonthly", "Monthly")',
+                method: 'POST',
+                data: { id: id },
+                success: function (response) {
+                       $('#PartialMonthly').html(response);
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }
+        });
     });
 
 

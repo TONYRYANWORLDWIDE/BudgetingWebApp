@@ -88,26 +88,26 @@ namespace MonthlyBillsWithDapper.Logic
             return false;
         }
 
-        public bool InsertMonthly(MonthlyBill monthlyBill)
+        public bool InsertMonthly(MonthlyBill monthlyBill , string ASPUser)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("Bill", monthlyBill.Bill);
             parameters.Add("Cost", monthlyBill.Cost);
             parameters.Add("Date", monthlyBill.Date);
-            parameters.Add("UserID", "a5ca7194-40f8-4d8e-81ed-d56e7338317f"); // TODO use ASP User once login added
+            parameters.Add("UserID", ASPUser); // TODO use ASP User once login added
 
             var procResponse = new Instance<dynamic>().Execute("dbo.insertMonthlyBills", parameters);
             if (procResponse != null)
                 return true;
             return false;
         }
-        public bool InsertWeekly(WeeklyBill weeklyBill)
+        public bool InsertWeekly(WeeklyBill weeklyBill, string ASPUser)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("Bill", weeklyBill.Bill);
             parameters.Add("Cost", weeklyBill.Cost);
             parameters.Add("DayOfWeek", weeklyBill.DayOfWeek);
-            parameters.Add("UserID", "a5ca7194-40f8-4d8e-81ed-d56e7338317f"); // TODO use ASP User once login added
+            parameters.Add("UserID", ASPUser); // TODO use ASP User once login added
             var procResponse = new Instance<dynamic>().Execute("dbo.insertWeeklyBills", parameters);
             if (procResponse != null)
                 return true;

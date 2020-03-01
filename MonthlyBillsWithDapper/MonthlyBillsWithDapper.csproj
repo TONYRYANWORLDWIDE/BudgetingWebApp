@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Logic\GetUserID.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.30" />
     <PackageReference Include="jQuery" Version="3.4.1" />
     <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
