@@ -171,7 +171,14 @@
 
                        alert("Updated Weekly");
  
-                    //$('#PartialWeekly').html(response);                    
+                    //$('#PartialWeekly').html(response);    
+
+                    $.ajax({
+
+                        url : '@Url.Action('
+                    })
+
+
                 },
                 error: function () {
                     alert("Sorry, there's been an error with weekly.");
