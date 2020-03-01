@@ -32,49 +32,8 @@
 
 <div id="PartialBringHome"></div>
 
+<div id="PartialUpcoming"></div>
 
-<table id="UpcomingBillsTable" class="table">
-    <thead>
-        <tr>
-            <th style="width: 20%;">Name</th>
-            <th style="width: 12%;">Date</th>
-            <th style="width: 18%;">Day Of Week</th>
-            <th>Type</th>
-            <th>Amount</th>
-            <th>Running Total</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var upcomingBill in Model.TheUpcomingBills)
-        {
-            <tr>
-                <td>
-                    @Html.EditorFor(modelItem => upcomingBill.Name, new { htmlAttributes = new { @class = "form-control Name" } })
-                </td>
-
-                <td>
-                    @Html.EditorFor(modelItem => upcomingBill.TheDate, new { htmlAttributes = new { @class = "form-control TheDate" } })
-                </td>
-                <td>
-                    @Html.EditorFor(modelItem => upcomingBill.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
-                </td>
-                <td>
-                    @Html.EditorFor(modelItem => upcomingBill.Type, new { htmlAttributes = new { @class = "form-control Type" } })
-                </td>
-                <td>
-                    @Html.EditorFor(modelItem => upcomingBill.Amount, new { htmlAttributes = new { @class = "form-control Type" } })
-                </td>
-                <td>
-                    @Html.EditorFor(modelItem => upcomingBill.RunningTotal, new { htmlAttributes = new { @class = "form-control Type" } })
-                </td>
-                <td>
-                    <a class="Update" href="javascript:;">Update</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
 
 
 <div id="PartialWeekly"></div>
@@ -89,7 +48,6 @@
         $("#PartialBringHome").hide();
         $("#PartialMonthly").hide();
     });
-
 
     $("#BringHomeButton").click(function () {
         $("#PartialBringHome").show();
@@ -113,32 +71,32 @@
                     alert("Sorry, there's been an error. Partial BringHome");
                 }
             });
-        });
+    });
 
 
-        $("#MonthlyBillsButton").click(function () {
-            $("#PartialMonthly").show();
-            $("#PartialWeekly").hide();
-            $("#UpcomingBillsTable").hide();
-            $("#PartialBringHome").hide();
-            $(this).addClass("colorButton")
-            $("#WeeklyBillsButton").removeClass("colorButton")
-            $("#UpcomingBillsButton").removeClass("colorButton")
-            $("#BringHomeButton").removeClass("colorButton")
+    $("#MonthlyBillsButton").click(function () {
+        $("#PartialMonthly").show();
+        $("#PartialWeekly").hide();
+        $("#UpcomingBillsTable").hide();
+        $("#PartialBringHome").hide();
+        $(this).addClass("colorButton")
+        $("#WeeklyBillsButton").removeClass("colorButton")
+        $("#UpcomingBillsButton").removeClass("colorButton")
+        $("#BringHomeButton").removeClass("colorButton")
 
-                $.ajax({
+            $.ajax({
 
-                    url: '@Url.Action("PartialMonthly","Monthly")',
-                    method: 'Get',
-                    success: function (response) {
+                url: '@Url.Action("PartialMonthly","Monthly")',
+                method: 'Get',
+                success: function (response) {
 
-                        $('#PartialMonthly').html(response);
-                    },
-                    error: function () {
-                        alert("Sorry, there's been an error. Partial Monthly");
-                    }
-                });
-        });
+                    $('#PartialMonthly').html(response);
+                },
+                error: function () {
+                    alert("Sorry, there's been an error. Partial Monthly");
+                }
+            });
+    });
 
     $("#WeeklyBillsButton").click(function () {
         $("#PartialMonthly").hide();
@@ -150,17 +108,17 @@
         $("#UpcomingBillsButton").removeClass("colorButton")
         $("#BringHomeButton").removeClass("colorButton")
 
-        $.ajax({
+            $.ajax({
 
-            url: '@Url.Action("PartialWeekly","Monthly")',
-            method: 'Get',
-            success: function (response) {
-                $('#PartialWeekly').html(response);
-            },
-            error: function () {
-                alert("Sorry, there's been an error. Partial Monthly");
-            }
-        });
+                url: '@Url.Action("PartialWeekly","Weekly")',
+                method: 'Get',
+                success: function (response) {
+                    $('#PartialWeekly').html(response);
+                },
+                error: function () {
+                    alert("Sorry, there's been an error. Partial Monthly");
+                }
+            });
     });     
 
 
@@ -178,17 +136,14 @@
             }
         });
 
-                $("#UpcomingBillsTable").show();
-                $("#PartialMonthly").hide();
-                $("#BringHomeBillsTable").hide();
-                 $("#PartialWeekly").hide();
-                $(this).addClass("colorButton")
-                $("#MonthlyBillsButton").removeClass("colorButton")
-                $("#WeeklyBillsButton").removeClass("colorButton")
-                $("#BringHomeButton").removeClass("colorButton")
+            $("#UpcomingBillsTable").show();
+            $("#PartialMonthly").hide();
+            $("#BringHomeBillsTable").hide();
+                $("#PartialWeekly").hide();
+            $(this).addClass("colorButton")
+            $("#MonthlyBillsButton").removeClass("colorButton")
+            $("#WeeklyBillsButton").removeClass("colorButton")
+            $("#BringHomeButton").removeClass("colorButton")
     });
-
-
-
 
 </script>

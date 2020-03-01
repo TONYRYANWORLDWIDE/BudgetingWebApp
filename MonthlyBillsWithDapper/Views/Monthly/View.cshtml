@@ -1,0 +1,48 @@
+﻿@model MonthlyBillsWithDapper.Models.BillsViewModel
+
+<table id="UpcomingBillsTable" class="table">
+    <thead>
+        <tr>
+            <th style="width: 20%;">Name</th>
+            <th style="width: 10%;">Date</th>
+            <th style="width: 15%;">Day Of Week</th>
+            <th style="width: 12%;">Type</th>
+            <th style="width: 12%;">Amount</th>
+            <th style="width: 12%;">Running Total</th>
+            <th></th>
+            <th style="width: 3%;">Transaction Complete?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var upcomingBill in Model.TheUpcomingBills)
+        {
+            <tr>
+                <td>
+                    @Html.EditorFor(modelItem => upcomingBill.Name, new { htmlAttributes = new { @class = "form-control Name" } })
+                </td>
+
+                <td>
+                    @Html.EditorFor(modelItem => upcomingBill.TheDate, new { htmlAttributes = new { @class = "form-control TheDate" } })
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => upcomingBill.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => upcomingBill.Type, new { htmlAttributes = new { @class = "form-control Type" } })
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => upcomingBill.Amount, new { htmlAttributes = new { @class = "form-control Type" } })
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => upcomingBill.RunningTotal, new { htmlAttributes = new { @class = "form-control Type" } })
+                </td>
+                <td>
+                    <a class="Update" href="javascript:;">Update</a>
+                </td>
+                <td class="Paid">
+                    @Html.CheckBoxFor(modelItem => upcomingBill.Paid, new { @class = "k-checkbox" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
