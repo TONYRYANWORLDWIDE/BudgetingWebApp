@@ -14,7 +14,11 @@ namespace MonthlyBillsWithDapper.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+         
+            builder.ConfigureServices((context, services) =>
+            {
+
+
                 services.AddDbContext<MonthlyBillsWithDapperContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("Bills")));
@@ -23,7 +27,9 @@ namespace MonthlyBillsWithDapper.Areas.Identity
                     .AddEntityFrameworkStores<MonthlyBillsWithDapperContext>();
                 services.AddControllersWithViews();
                 services.AddRazorPages();
+                services.AddMvc();
             });
         }
+
     }
 }

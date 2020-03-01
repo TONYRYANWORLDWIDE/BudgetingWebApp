@@ -29,9 +29,9 @@ namespace MonthlyBillsWithDapper
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MonthlyBillsWithDapperContext>(options =>
-            options.UseSqlServer(
-            Configuration.GetConnectionString("Bills")));
+            //services.AddDbContext<MonthlyBillsWithDapperContext>(options =>
+            //options.UseSqlServer(
+            //Configuration.GetConnectionString("Bills")));
             //services.AddDefaultIdentity<IdentityUser>(options =>
             //                                          options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<MonthlyBillsWithDapperContext>();
@@ -58,17 +58,15 @@ namespace MonthlyBillsWithDapper
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            app.UseRouting();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseRouting();
-
             app.UseAuthorization();
             app.UseAuthentication();
-
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Monthly}/{action=Index}/{id?}");
