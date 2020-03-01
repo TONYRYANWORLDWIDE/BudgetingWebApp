@@ -124,8 +124,12 @@
                 method: 'POST',
                 data: { monthlyBill: monthlyBill },
                 success: function (response) {
-                    $('#PartialMonthly').html(response);
+                    //$('#PartialMonthly').html(response);
                     alert("Updated");
+                $.ajax({
+
+                        url : '@Url.Action("PartialMonthly", "Monthly")'
+                    })
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");
