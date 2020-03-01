@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MonthlyBillsWithDapper.Entity;
@@ -13,7 +14,7 @@ namespace MonthlyBillsWithDapper.Controllers
     {
         public IActionResult Index()
         {
-            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";   //testing
+            string ASPUser = GetUserId();   //testing
             var model = new BillsViewModel();
             var mgr = new GetBills();
             var bh = new BringHomeLogic();
@@ -27,7 +28,7 @@ namespace MonthlyBillsWithDapper.Controllers
 
         public PartialViewResult UpdateMonthly(MonthlyBill monthlyBill)
         {
-            string ASPUser = "a5ca7194-40f8-4d8e-81ed-d56e7338317f";
+            string ASPUser = GetUserId();
             var mgr = new GetBills();
             mgr.UpdateMonthly(monthlyBill);
             var model = new BillsViewModel();
