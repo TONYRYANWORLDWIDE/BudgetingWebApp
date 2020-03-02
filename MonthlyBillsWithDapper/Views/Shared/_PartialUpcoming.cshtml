@@ -2,40 +2,40 @@
 
 
 
-    <table id="UpcomingBillsTable" class="table">
-        <thead>
+<table id="UpcomingBillsTable" class="table">
+    <thead>
+        <tr>
+            <th style="width: 20%;">Name</th>
+            <th style="width: 10%;">Date</th>
+            <th style="width: 15%;">Day Of Week</th>
+            <th style="width: 12%;">Type</th>
+            <th style="width: 12%;">Amount</th>
+            <th style="width: 12%;">Running Total</th>
+            <th></th>
+            <th style="width: 3%;">Paid</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var upcomingBill in Model.TheUpcomingBills)
+        {
             <tr>
-                <th style="width: 20%;">Name</th>
-                <th style="width: 10%;">Date</th>
-                <th style="width: 15%;">Day Of Week</th>
-                <th style="width: 12%;">Type</th>
-                <th style="width: 12%;">Amount</th>
-                <th style="width: 12%;">Running Total</th>
-                <th></th>
-                <th style="width: 3%;">Paid</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var upcomingBill in Model.TheUpcomingBills)
-            {
-            <tr>
-                <td>
+                <td class="Name">
                     @Html.EditorFor(modelItem => upcomingBill.Name, new { htmlAttributes = new { @class = "form-control Name" } })
                 </td>
 
-                <td>
+                <td class="TheDate">
                     @Html.EditorFor(modelItem => upcomingBill.TheDate, new { htmlAttributes = new { @class = "form-control TheDate" } })
                 </td>
-                <td>
+                <td class="DayOfWeek">
                     @Html.EditorFor(modelItem => upcomingBill.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
                 </td>
-                <td>
+                <td class="Type">
                     @Html.EditorFor(modelItem => upcomingBill.Type, new { htmlAttributes = new { @class = "form-control Type" } })
                 </td>
-                <td>
+                <td class="Amount">
                     @Html.EditorFor(modelItem => upcomingBill.Amount, new { htmlAttributes = new { @class = "form-control Amount" } })
                 </td>
-                <td>
+                <td class="RunningTotal">
                     @Html.EditorFor(modelItem => upcomingBill.RunningTotal, new { htmlAttributes = new { @class = "form-control RunningTotal" } })
                 </td>
                 <td>
@@ -45,6 +45,54 @@
                     @Html.CheckBoxFor(modelItem => upcomingBill.Paid, new { @class = "k-checkbox" })
                 </td>
             </tr>
+        }
+    </tbody>
+</table>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script type="text/javascript">
+
+
+        $("input.k-checkbox:checkbox").change(function () {
+        var upComingPaid = {};
+        var row = $(this).closest("tr");
+            
+        upComingPaid.TheDate = row.find(".TheDate").find('input').val();
+        upComingPaid.Name = row.find(".Name").find('input').val();
+        upComingPaid.DayOfWeek = row.find(".DayOfWeek").find('input').val()
+        upComingPaid.Amount = row.find(".Amount").find('input').val();
+        upComingPaid.Type = row.find(".Type").find('input').val();
+
+        upComingPaid.id = row.find(".id").find('span').html();
+            if (this.checked)
+            {
+                upComingPaid.Paid = true;
+                console.log("checked");
             }
-        </tbody>
-    </table>
+            else
+            {
+                console.log("it aint");
+                upComingPaid.Paid = false;
+            }
+            console.log("Ajax Start");
+
+            $.ajax({
+                url: '@Url.Action("UpcomingPaid", "Upcoming")',
+                type: "POST",
+                data: { upComingPaid: upComingPaid },
+                success: function (response) {
+
+                    $.ajax({
+                        url: '@Url.Action("PartialUpcoming", "Upcoming")'
+                    })
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }
+
+            });
+        });
+
+</script>

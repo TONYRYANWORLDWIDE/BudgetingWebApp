@@ -18,7 +18,7 @@ namespace MonthlyBillsWithDapper.Logic
             return bringhome;
         }
 
-        public bool InsertBringHome(BringHome bringhome)
+        public bool InsertBringHome(BringHome bringhome, string AspUser)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("Name", bringhome.Name);
@@ -26,7 +26,7 @@ namespace MonthlyBillsWithDapper.Logic
             parameters.Add("DayOfWeek", bringhome.DayOfWeek);
             parameters.Add("Frequency", bringhome.Frequency);
             parameters.Add("PickOnePayDate", bringhome.PickOnePayDate);
-            parameters.Add("UserID", "a5ca7194-40f8-4d8e-81ed-d56e7338317f"); // TODO use ASP User once login added
+            parameters.Add("UserID", AspUser); // TODO use ASP User once login added
 
             var procResponse = new Instance<dynamic>().Execute("dbo.insertBringHome", parameters);
             if (procResponse != null)

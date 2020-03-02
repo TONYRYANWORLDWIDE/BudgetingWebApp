@@ -115,7 +115,20 @@ namespace MonthlyBillsWithDapper.Logic
         }
 
 
-
-
+        public bool UpdateUpcomingPaid(UpcomingAlter upComingPaid, string ASPUser)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("TheDate", upComingPaid.TheDate);
+            parameters.Add("Name", upComingPaid.Name);
+            parameters.Add("Amount", upComingPaid.Amount);
+            parameters.Add("Type", upComingPaid.Type);
+            parameters.Add("Paid", upComingPaid.Paid);
+            parameters.Add("DayOfWeek", upComingPaid.DayOfWeek);
+            parameters.Add("ASPUser", ASPUser); // TODO use ASP User once login added
+            var procResponse = new Instance<dynamic>().Execute("dbo.insertUpcomingAlter", parameters);
+            if (procResponse != null)
+                return true;
+            return false;
+        }
     }
 }

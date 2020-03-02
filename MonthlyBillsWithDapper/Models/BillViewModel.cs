@@ -25,6 +25,7 @@ namespace MonthlyBillsWithDapper.Models
         public List<WeeklyBill> WeeklyBills {get;set;}
         public List<BringHome> BringHomes { get; set; }
         public BankBalance bankBalance { get; set; }
+        public UpcomingAlter upcomingAlter { get; set; }
         public Entity.DayOfWeek dayofWeek { get; set; }
 
 

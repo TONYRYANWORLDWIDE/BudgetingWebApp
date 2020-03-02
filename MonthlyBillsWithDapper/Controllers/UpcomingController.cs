@@ -39,5 +39,14 @@ namespace MonthlyBillsWithDapper.Controllers
             model.TheUpcomingBills = mgr.getUpcomingBills(ASPUser);
             return PartialView("_PartialUpcoming", model);
         }
+
+
+        public bool UpcomingPaid(UpcomingAlter upComingPaid)
+        {
+            string ASPUser = GetUserId();
+            var mgr = new GetBills();
+            mgr.UpdateUpcomingPaid(upComingPaid, ASPUser);
+            return true;
+        }
     }
 }

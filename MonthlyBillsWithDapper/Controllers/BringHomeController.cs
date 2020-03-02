@@ -45,8 +45,9 @@ namespace MonthlyBillsWithDapper.Controllers
         [HttpPost]
         public bool InsertBringHome(BringHome bringHome)
         {
+            string AspUser = GetUserId();
             var bh = new BringHomeLogic();
-            bh.InsertBringHome(bringHome);
+            bh.InsertBringHome(bringHome, AspUser);
             return true;
         }
 
