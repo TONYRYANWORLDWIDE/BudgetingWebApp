@@ -39,7 +39,7 @@
                     @Html.EditorFor(modelItem => upcomingBill.RunningTotal, new { htmlAttributes = new { @class = "form-control RunningTotal" } })
                 </td>
                 <td>
-                    <a class="Update" href="javascript:;">Update</a>
+                    <a class="UpdateUpcoming" href="javascript:;">Update</a>
                 </td>
                 <td class="Paid">
                     @Html.CheckBoxFor(modelItem => upcomingBill.Paid, new { @class = "k-checkbox Paid" })
@@ -57,6 +57,56 @@
 
 
         $("input.k-checkbox:checkbox").change(function () {
+        var upComingPaid = {};
+        var row = $(this).closest("tr");
+            
+        upComingPaid.TheDate = row.find(".TheDate").find('input').val();
+        upComingPaid.Name = row.find(".Name").find('input').val();
+        upComingPaid.DayOfWeek = row.find(".DayOfWeek").find('input').val()
+        upComingPaid.Amount = row.find(".Amount").find('input').val();
+        upComingPaid.Type = row.find(".Type").find('input').val();
+
+        upComingPaid.id = row.find(".id").find('span').html();
+            if (this.checked)
+            {
+                upComingPaid.Paid = true;
+                console.log("checked");
+            }
+            else
+            {
+                console.log("it aint");
+                upComingPaid.Paid = false;
+            }
+            console.log("Ajax Start");
+
+            $.ajax({
+                url: '@Url.Action("UpcomingPaid", "Upcoming")',
+                type: "POST",
+                data: { upComingPaid: upComingPaid },
+                success: function (response) {
+                    $.ajax({
+                        url: '@Url.Action("PartialUpcoming","Upcoming")',
+                        method: 'Get',
+                        success: function (response) {
+
+                            $('#PartialUpcoming').html(response);
+                        },
+                        error: function () {
+                        alert("You Fucked Up");
+                    }
+                });
+
+
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }
+
+            });
+        });
+
+
+        $(".UpdateUpcoming").click(function () {
         var upComingPaid = {};
         var row = $(this).closest("tr");
             
