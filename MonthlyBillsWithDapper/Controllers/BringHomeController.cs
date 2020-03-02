@@ -29,9 +29,7 @@ namespace MonthlyBillsWithDapper.Controllers
                 userID = "tempuser";
             }
             return userID;
-
         }
-
 
         public PartialViewResult PartialBringHome()
         {
@@ -43,11 +41,11 @@ namespace MonthlyBillsWithDapper.Controllers
         }
 
         [HttpPost]
-        public bool InsertBringHome(BringHome bringHome)
+        public bool InsertBringHome(BringHome bringhome)
         {
             string AspUser = GetUserId();
             var bh = new BringHomeLogic();
-            bh.InsertBringHome(bringHome, AspUser);
+            bh.InsertBringHome(bringhome, AspUser);
             return true;
         }
 
@@ -55,6 +53,14 @@ namespace MonthlyBillsWithDapper.Controllers
         {
             var bh = new BringHomeLogic();
             bh.DeleteBringHome(id);
+            return true;
+        }
+
+        public bool UpdateBringHome(BringHome bringhome)
+        {
+            string AspUser = GetUserId();
+            var bh = new BringHomeLogic();
+            bh.UpdateBringHome(bringhome, AspUser);
             return true;
         }
     }

@@ -43,5 +43,21 @@ namespace MonthlyBillsWithDapper.Logic
                 return true;
             return false;
         }
+
+        public bool UpdateBringHome(BringHome bringhome, string AspUser)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("id", bringhome.id);
+            parameters.Add("Name", bringhome.Name);
+            parameters.Add("amount", bringhome.amount);
+            parameters.Add("DayOfWeek", bringhome.DayOfWeek);
+            parameters.Add("Frequency", bringhome.Frequency);
+            parameters.Add("PickOnePayDate", bringhome.PickOnePayDate);
+            parameters.Add("UserID", AspUser); // TODO use ASP User once login added
+            var procResponse = new Instance<dynamic>().Execute("dbo.updateBringHome", parameters);
+            if (procResponse != null)
+                return true;
+            return false;
+        }
     }
 }

@@ -45,19 +45,19 @@
                 </td>
 
                 <td class="Name">
-                    @Html.EditorFor(modelItem => bringhome.Name, new { htmlAttributes = new { @class = "form-control Bill" } })
+                    @Html.EditorFor(modelItem => bringhome.Name, new { htmlAttributes = new { @class = "form-control Name" } })
                 </td>
                 <td class="amount">
-                    @Html.EditorFor(modelItem => bringhome.amount, new { htmlAttributes = new { @class = "form-control Cost" } })
+                    @Html.EditorFor(modelItem => bringhome.amount, new { htmlAttributes = new { @class = "form-control amount" } })
                 </td>
                 <td class="DayOfWeek">
-                    @Html.EditorFor(modelItem => bringhome.DayOfWeek, new { htmlAttributes = new { @class = "form-control Date" } })
+                    @Html.EditorFor(modelItem => bringhome.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
                 </td>
-                <td class="DayOfWeek">
-                    @Html.EditorFor(modelItem => bringhome.Frequency, new { htmlAttributes = new { @class = "form-control Date" } })
+                <td class="Frequency">
+                    @Html.EditorFor(modelItem => bringhome.Frequency, new { htmlAttributes = new { @class = "form-control Frequency" } })
                 </td>
-                <td class="DayOfWeek">
-                    @Html.EditorFor(modelItem => bringhome.PickOnePayDate, new { htmlAttributes = new { @class = "form-control Date" } })
+                <td class="PickOnePayDate">
+                    @Html.EditorFor(modelItem => bringhome.PickOnePayDate, new { htmlAttributes = new { @class = "form-control PickOnePayDate" } })
                 </td>
                 <td>
                     <a class="UpdateBringHome" href="javascript:;">Update</a>
@@ -84,50 +84,88 @@
 
     });
 
-        $("#submitNewBringHome").click(function () {
-            var bh = $("#CreateBringHomeForm").serializeArray();
-            console.log(bh);
-            var bringHome = {}
+    $("#submitNewBringHome").click(function () {
+        var bh = $("#CreateBringHomeForm").serializeArray();
+        console.log(bh);
+        var bringHome = {}
 
-            var Name = bh[0].value;
-            bringHome.Name = Name
+        var Name = bh[0].value;
+        bringHome.Name = Name
 
-            var amount = bh[1].value;
-            bringHome.amount = amount
+        var amount = bh[1].value;
+        bringHome.amount = amount
 
-            var DayOfWeek = bh[2].value;
-            bringHome.DayOfWeek = DayOfWeek
+        var DayOfWeek = bh[2].value;
+        bringHome.DayOfWeek = DayOfWeek
 
-            var Frequency = bh[3].value;
-            bringHome.Frequency = Frequency;
+        var Frequency = bh[3].value;
+        bringHome.Frequency = Frequency;
 
-            bringHome.PickOnePayDate = $(".datepicker").val();
-            $.ajax({
-                    url: '@Url.Action("InsertBringHome", "BringHome")',
-                    method: 'POST',
-                    data: { bringHome: bringHome },
-                success: function (response) {
-                    $("#CreateBringHomeForm").trigger("reset");
-                    $("#CreateBringHomeForm").toggle();
-                    //$('#PartialBringHome').html(response);
+        bringHome.PickOnePayDate = $(".datepicker").val();
+        $.ajax({
+                url: '@Url.Action("InsertBringHome", "BringHome")',
+                method: 'POST',
+                data: { bringHome : bringHome },
+            success: function (response) {
+                $("#CreateBringHomeForm").trigger("reset");
+                $("#CreateBringHomeForm").toggle();
+                //$('#PartialBringHome').html(response);
 
-                    $.ajax({
-                        url: '/BringHome/PartialBringHome',
-                        success: function (response) {
-                            $("#PartialBringHome").html(response);
-                        },
-                        error : function() {
-                            alert("Error on embeeded ajax");
-                        }
-                        
-                    });
-
+                $.ajax({
+                    url: '@Url.Action("PartialBringHome", "BringHome")',
+                    success: function (response) {
+                        $("#PartialBringHome").html(response);
                     },
-                    error: function () {
-                        alert("Sorry, there's been an error.");
+                    error : function() {
+                        alert("Error on embeeded ajax");
                     }
+                        
+                });
+
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }
+        });
+    });
+
+
+        $(".UpdateBringHome").click(function () {
+
+        var bringhome = {};
+            var row = $(this).closest("tr");
+            var id = row.find(".id").find('input').val();
+        var Name = row.find(".Name").find('input').val();
+        var amount = row.find(".amount").find('input').val();
+        var DayOfWeek = row.find(".DayOfWeek").find('input').val();
+        var Frequency = row.find(".Frequency").find('input').val();
+        var PickOnePayDate = row.find(".PickOnePayDate").find('input').val();
+
+            bringhome.id = id;
+        bringhome.Name = Name;
+        bringhome.amount = amount;
+        bringhome.DayOfWeek = DayOfWeek;
+        bringhome.Frequency = Frequency;
+        bringhome.PickOnePayDate = PickOnePayDate;
+
+            $.ajax({
+                url: '@Url.Action("UpdateBringHome", "BringHome")',
+                method: 'POST',
+                data: { bringhome: bringhome },
+                success: function (response) {
+                    //$('#PartialMonthly').html(response);
+                    alert("Updated");
+                $.ajax({
+
+                        url : '@Url.Action("PartialBringHome", "BringHome")'
+                    })
+                },
+                error: function () {
+                    alert("Sorry, there's been an error.");
+                }
             });
         });
+
 
 
 
