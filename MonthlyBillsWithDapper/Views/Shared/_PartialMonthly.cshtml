@@ -6,17 +6,24 @@
 
 <form id="CreateMonthlyBillForm">
 
-    <span class="Bill">Bill:</span>
-    <input type="text" name="Bill" required>
+    <div class="grid-container-Monthly">
+        <div class="grid-item">
+            <span class="Bill">Bill:</span>
+            <input class="form-control" type="text" name="Bill" required>
+        </div>
 
-    <span class="Cost">Cost: </span>
-    <input type="text" name="Cost" required>
+        <div class="grid-item">
+            <span class="Cost">Cost: </span>
+            <input class="form-control" type="text" name="Cost" required>
+        </div>
 
-    <span class="Date">Day Of Month: </span>
-    @*<input type="text" name="Date" id="Date" required>*@
-    @Html.DropDownList("Day Of Month", Enumerable.Range(1, 31).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
-
-    <button type="button" id="submitNewMonthlyBill">Submit</button>
+        <div class="grid-item">
+            <span class="Date">Day Of Month: </span>
+            @*<input type="text" name="Date" id="Date" required>*@
+            @Html.DropDownList("Day Of Month", Enumerable.Range(1, 31).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "Date form-control" })
+        </div>
+    </div>
+        <button type="button" id="submitNewMonthlyBill">Submit</button>
 </form>
 
 

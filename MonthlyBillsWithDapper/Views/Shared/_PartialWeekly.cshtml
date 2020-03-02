@@ -7,17 +7,22 @@
 
 <form id="CreateWeeklyBillForm">
 
-    <span class="Bill">Bill:</span>
-    <input type="text" name="Bill" required>
-
-    <span class="Cost">Cost: </span>
-    <input type="text" name="Cost" required>
-
-    <span class="Date">Day Of Week: </span>
-    @*<input type="text" name="DayOfweek" id="DayOfweek" required>*@
-    @Html.DropDownList("Day", new SelectList(Enum.GetValues(typeof(DayOfWeek))))
-
-    <button type="button" id="submitNewWeeklyBill">Submit</button>
+    <div class="grid-container-Weekly">
+        <div class="grid-item">
+            <span class="Bill">Bill:</span>
+            <input class="form-control" type="text" name="Bill" required>
+        </div>
+        <div class="grid-item">
+            <span class="Cost">Cost: </span>
+            <input class="form-control" type="text" name="Cost" required>
+        </div>
+        <div class="grid-item">
+            <span class="DayOfWeek">Day Of Week: </span>
+            @*<input type="text" name="DayOfweek" id="DayOfweek" required>*@
+            @Html.DropDownList("Day", new SelectList(Enum.GetValues(typeof(DayOfWeek))), new { @class = "DayOfWeek form-control" })
+        </div>
+    </div>
+        <button type="button" id="submitNewWeeklyBill">Submit</button>
 </form>
 
 
