@@ -14,8 +14,6 @@ namespace MonthlyBillsWithDapper.Controllers
 {
     public class MonthlyController : Controller
     {
-
-
         public string GetUserId()
         {
             string userID;
@@ -34,19 +32,7 @@ namespace MonthlyBillsWithDapper.Controllers
             return userID;
 
         }
-        public IActionResult Index()
-        {
-            string ASPUser = GetUserId();  //testing
-            var model = new BillsViewModel();
-            var mgr = new GetBills();
-            var bh = new BringHomeLogic();
-            model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
-            model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
-            model.TheUpcomingBills = mgr.getUpcomingBills(ASPUser);
-            model.bankBalance = mgr.getBankBalance(ASPUser);
-            model.BringHomes = bh.getBringHome(ASPUser);
-            return View(model);
-        }
+
 
         public bool UpdateMonthly(MonthlyBill monthlyBill)
         {
@@ -111,13 +97,13 @@ namespace MonthlyBillsWithDapper.Controllers
             return PartialView("_PartialWeekly", model);
         }
 
-        public ActionResult getUpcoming()
-        {
-            string ASPUser = GetUserId();
-            var mgr = new GetBills();
-            mgr.getUpcomingBills(ASPUser);
-            return RedirectToAction("Index");
-        }
+        //public ActionResult getUpcoming()
+        //{
+        //    string ASPUser = GetUserId();
+        //    var mgr = new GetBills();
+        //    mgr.getUpcomingBills(ASPUser);
+        //    return RedirectToAction("Index");
+        //}
 
         public PartialViewResult PartialMonthly()
         {
