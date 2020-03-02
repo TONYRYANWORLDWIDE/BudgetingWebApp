@@ -12,8 +12,9 @@
     <span class="Cost">Cost: </span>
     <input type="text" name="Cost" required>
 
-    <span class="Date">Date: </span>
-    <input type="text" name="Date" id="Date" required>
+    <span class="Date">Day Of Month: </span>
+    @*<input type="text" name="Date" id="Date" required>*@
+    @Html.DropDownList("Day Of Month", Enumerable.Range(1, 31).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
 
     <button type="button" id="submitNewMonthlyBill">Submit</button>
 </form>
@@ -25,7 +26,7 @@
             <th class="TJR_th_Hidden"></th>
             <th>Bill</th>
             <th>Cost</th>
-            <th>Day</th>
+            <th>Day Of Month</th>
             <th></th>
         </tr>
     </thead>
@@ -51,15 +52,15 @@
                     <a class="DeleteMonthly" href="javascript:;">Delete</a>
                 </td>
             </tr>
-        }
+         }
     </tbody>
-</table>
+    </table>
 
 
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-<script type="text/javascript">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script type="text/javascript">
 
      $("#CreateMonthlyBillForm").validate({
 
@@ -156,4 +157,4 @@
             });
     });
 
-</script>
+    </script>
