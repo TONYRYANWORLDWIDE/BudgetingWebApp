@@ -29,18 +29,20 @@ namespace MonthlyBillsWithDapper
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<MonthlyBillsWithDapperContext>(options =>
-            //options.UseSqlServer(
-            //Configuration.GetConnectionString("Bills")));
-            //services.AddDefaultIdentity<IdentityUser>(options =>
-            //                                          options.SignIn.RequireConfirmedAccount = true)
-            //    .AddEntityFrameworkStores<MonthlyBillsWithDapperContext>();
-
 
             services.AddRazorPages(); 
             services.AddControllersWithViews();
-        
-            //services.AddControllersWithViews().AddRazorRuntimeCompilation(); THIS IS WHAT ROUTEHUB USES
+
+            services.AddAuthentication()
+            .AddGoogle(options =>
+            {
+                IConfigurationSection googleAuthNSection =
+                    Configuration.GetSection("Authentication:Google");
+
+                options.ClientId = "980072325837-18l2k3f353i3gpvkda6vflf3gvr9a0ai.apps.googleusercontent.com"; // TODO pull from json settings
+                options.ClientSecret = "nFGVI5SYmtkHRj05O_KjycsN"; // TODO pull from json settings
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
