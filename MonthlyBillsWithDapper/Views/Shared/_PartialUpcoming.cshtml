@@ -41,8 +41,9 @@
                 <td>
                     <a class="Update" href="javascript:;">Update</a>
                 </td>
-                <td>
-                    @Html.CheckBoxFor(modelItem => upcomingBill.Paid, new { @class = "k-checkbox" })
+                <td class="Paid">
+                    @Html.CheckBoxFor(modelItem => upcomingBill.Paid, new { @class = "k-checkbox Paid" })
+                    @*<input type="checkbox" asp-for = "@upcomingBill.Paid" />*@
                 </td>
             </tr>
         }
@@ -83,10 +84,19 @@
                 type: "POST",
                 data: { upComingPaid: upComingPaid },
                 success: function (response) {
-
                     $.ajax({
-                        url: '@Url.Action("PartialUpcoming", "Upcoming")'
-                    })
+                        url: '@Url.Action("PartialUpcoming","Upcoming")',
+                        method: 'Get',
+                        success: function (response) {
+
+                            $('#PartialMonthly').html(response);
+                        },
+                        error: function () {
+                        alert("You Fucked Up");
+                    }
+                });
+
+
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");

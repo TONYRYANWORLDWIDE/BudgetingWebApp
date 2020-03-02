@@ -17,6 +17,6 @@ namespace MonthlyBillsWithDapper.Entity
         public float Amount { get; set; }
         public string Type { get; set; }
         public string UserID { get; set; }
-        public Nullable<bool> Paid { get; set; }
+        public bool Paid { get; set; }
     }
 }
