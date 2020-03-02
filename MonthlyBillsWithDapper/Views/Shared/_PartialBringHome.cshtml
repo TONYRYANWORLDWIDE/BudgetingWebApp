@@ -3,27 +3,51 @@
 
 <a class="CreateBringHome" href="javascript:;">Create</a>
 
+@*<form id="CreateBringHomeForm">
+        <span class="Name">Name:</span>
+        <input type="text" name="Name" required>
+
+        <span class="Amount">Amount: </span>
+        <input type="text" name="Amount" required>
+
+        <span class="Date">Day Of Week: </span>
+        @Html.DropDownList("Day", new SelectList(Enum.GetValues(typeof(DayOfWeek))))
+
+        <span class="Frequency">Frequency</span>
+        @Html.DropDownList("Frequency", new SelectList(Enum.GetValues(typeof(Entity.Frequency))), new { @class = "FrequencySelector" })
+
+        <span class="PickOnePayDate">PickOnePayDate</span>
+        <input class="datepicker" type="date" id="datepicker">
+
+        <button type="button" id="submitNewBringHome">Submit</button>
+    </form>*@
+
+
 <form id="CreateBringHomeForm">
-
-    <span class="Name">Name:</span>
-    `<input type="text" name="Name" required>
-
-    <span class="Amount">Amount: </span>
-    <input type="text" name="Amount" required>
-
-    <span class="Date">Day Of Week: </span>
-    @Html.DropDownList("Day", new SelectList(Enum.GetValues(typeof(DayOfWeek))))
-
-    <span class="Frequency">Frequency</span>
-    @Html.DropDownList("Frequency", new SelectList(Enum.GetValues(typeof(Entity.Frequency))), new { @class = "FrequencySelector" })
-
-    <span class="PickOnePayDate">PickOnePayDate</span>
-    <input class="datepicker" type="date" id="datepicker">
-
+    <div class="grid-container-BringHome">
+        <div class="grid-item">
+            <span class="Name">Name:</span>
+            <input class="form-control" type="text" name="Name" required>
+        </div>
+        <div class="grid-item">
+            <span class="Amount ">Amount: </span>
+            <input class="form-control" type="text" name="Amount" required>
+        </div>
+        <div class="grid-item">
+            <span class="Date">Day Of Week: </span>
+            @Html.DropDownList("Day Of Week", new SelectList(Enum.GetValues(typeof(DayOfWeek))),new { @class = "DayOfWeek form-control" })
+        </div>
+        <div class="grid-item">
+            <span class="Frequency">Frequency</span>
+            @Html.DropDownList("Frequency", new SelectList(Enum.GetValues(typeof(Entity.Frequency))), new { @class = "FrequencySelector form-control" })
+        </div>
+        <div class="grid-item">
+            <span class="PickOnePayDate">PickOnePayDate</span>
+            <input class="datepicker form-control" type="date" id="datepicker">
+        </div>
+    </div>
     <button type="button" id="submitNewBringHome">Submit</button>
 </form>
-
-
 
 <table id="BringHomeBillsTable" class="table">
     <thead>
@@ -114,7 +138,7 @@
                     error : function() {
                         alert("Error on embeeded ajax");
                     }
-                        
+
                 });
 
                 },
@@ -181,7 +205,7 @@
                         error : function() {
                             alert("Error on embeeded ajax");
                         }
-                        
+
                     });
             },
 
