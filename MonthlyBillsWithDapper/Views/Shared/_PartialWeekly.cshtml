@@ -71,30 +71,6 @@
 
 
 
-    // $("#CreateWeeklyBillForm").validate({
-
-    //    rules: {
-    //        Date: {
-    //                required: true,
-    //                range: [1, 31]
-    //        }
-    //    }
-
-
-        //$('.month').datepicker({
-        //format: 'MM/YYYY',
-        //viewMode: 'months',
-        //minDate: moment().format("MMM YYYY"),
-        //defaultDate: moment(new Date())
-        //});
-
-
-        //$('.month').on('change change.datepicker', function (e) {
-        //console.log("pick your nose")
-        //});
-
-
-
     $(".CreateWeekly").on("click", function () {
 
         $("#CreateWeeklyBillForm").toggle();
@@ -114,24 +90,29 @@
 
 
             if (Bill === "" || Cost === "") {
-                alert('One of the fields is blank Bitch');
+                alert('One of the fields is blank');
                 return false;
             }
 
-            $.ajax({
-                url: '@Url.Action("InsertWeekly", "Monthly")',
-                method: 'POST',
-                data: { weeklyBillInsert: weeklyBillInsert },
-                success: function (response) {
-                    $("#CreateWeeklyBillForm").trigger("reset");
-                    $("#CreateWeeklyBillForm").toggle();
-                    $('#PartialWeekly').html(response);
-                    alert("Submit New weekly");
-                },
-                error: function () {
-                    alert("Sorry, there's been an error.");
-                }
-            });
+            if ($("#CreateWeeklyBillForm").valid()) {
+                $.ajax({
+                    url: '@Url.Action("InsertWeekly", "Monthly")',
+                    method: 'POST',
+                    data: { weeklyBillInsert: weeklyBillInsert },
+                    success: function (response) {
+                        $("#CreateWeeklyBillForm").trigger("reset");
+                        $("#CreateWeeklyBillForm").toggle();
+                        $('#PartialWeekly').html(response);
+                        alert("Submit New weekly");
+                    },
+                    error: function () {
+                        alert("Sorry, there's been an error.");
+                    }
+                });
+            } else {
+                alert("Form is not valid");
+                return false;
+            };
         });
 
          $(".DeleteWeekly").click(function() {
