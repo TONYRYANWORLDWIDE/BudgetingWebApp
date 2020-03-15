@@ -110,23 +110,31 @@
             monthlyBillInsert.Date = Date
 
             if (Bill === "" || Cost === "") {
-                alert('One of the fields is blank Bitch');
+                alert('One of the fields is blank');
                 return false;
             }
 
-            $.ajax({
-                url: '@Url.Action("InsertMonthly", "Monthly")',
-                method: 'POST',
-                data: { monthlyBillInsert: monthlyBillInsert },
-                success: function (response) {
-                    $("#CreateMonthlyBillForm").trigger("reset");
-                    $("#CreateMonthlyBillForm").toggle();
-                     $('#PartialMonthly').html(response);
-                },
-                error: function () {
-                    alert("Sorry, there's been an error.");
-                }
-            });
+            if ($("#CreateMonthlyBillForm").valid()) {
+                debugger;
+                $.ajax({
+                    url: '@Url.Action("InsertMonthly", "Monthly")',
+                    method: 'POST',
+                    data: { monthlyBillInsert: monthlyBillInsert },
+                    success: function (response) {
+                        $("#CreateMonthlyBillForm").trigger("reset");
+                        $("#CreateMonthlyBillForm").toggle();
+                        $('#PartialMonthly').html(response);
+                    },
+                    error: function () {
+                        alert("Sorry, there's been an error.");
+                    }
+                });
+            } else {
+                alert("Form is not valid");
+                return false;
+            };
+
+
         });
 
         $(".UpdateMonthly").click(function () {
