@@ -19,7 +19,7 @@ namespace MonthlyBillsWithDapper.Entity
         public string DayOfWeek { get; set; }
         public string Frequency { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please pick your most recent pay date")]
         [DataType(DataType.Date)]
         public DateTime? PickOnePayDate { get; set; }
         public string UserID { get; set; }

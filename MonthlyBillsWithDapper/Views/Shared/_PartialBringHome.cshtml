@@ -104,12 +104,11 @@
         var Frequency = bh[3].value;
         bringHome.Frequency = Frequency;
 
-        bringHome.PickOnePayDate = $(".datepicker").val();
-        var PickOnePayDate = bringHome.PickOnePayDate;
-        debugger;
-        console.log(PickOnePayDate);
+        var PickOnePayDate = $(".datepicker").val();
+        bringHome.PickOnePayDate = PickOnePayDate
+   
 
-        if (Name === "" || amount === "") {
+        if (Name === "" || amount === "" || PickOnePayDate === "") {
         alert('One of the fields is blank');
         return false;
         }
