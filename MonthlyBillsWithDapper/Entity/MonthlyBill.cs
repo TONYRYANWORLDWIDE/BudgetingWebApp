@@ -9,15 +9,19 @@ namespace MonthlyBillsWithDapper.Entity
     public class MonthlyBill
     {
         public int id { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter the name")]
 
-        [StringLength(15, ErrorMessage = "Name length can't be more than 15.")]
+        [StringLength(maximumLength: 15,  ErrorMessage ="Name length can't be more than 15.")]
         [Display(Name = "Bill")] 
         public string Bill { get; set; }
         [Required]
-        [Range(0,100)]
+
+
+        [Range(0,99999)]
         [Display(Name = "Cost")]
-        public Nullable<float> Cost { get; set; }
+        public float Cost { get; set; }
+
+
         [Required]
         [Range(0, 31)] 
         public int Date { get; set; }
