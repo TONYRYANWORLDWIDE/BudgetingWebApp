@@ -1,4 +1,5 @@
 ﻿@model MonthlyBillsWithDapper.Models.BillsViewModel
+@using MonthlyBillsWithDapper.Entity
 
 
 <a class="CreateMonthly" href="javascript:;">Create</a>
@@ -7,23 +8,24 @@
 <form id="CreateMonthlyBillForm">
 
     <div class="grid-container-Monthly">
+        @*@Html.ValidationSummary(true, "")*@
         <div class="grid-item">
-            <span class="Bill">Bill:</span>
-            <input class="form-control" type="text" name="Bill" required>
+            <span class="Bill">Bill: </span>
+            <input asp-for="@Model.monthlyBill.Bill" class="form-control"/>
+            <span asp-validation-for="@Model.monthlyBill.Bill" class="text-danger"></span>
         </div>
-
-        <div class="grid-item">
-            <span class="Cost">Cost: </span>
-            <input class="form-control" type="text" name="Cost" required>
-        </div>
-
+        @*@Html.ValidationSummary(true, "")*@
+    <div class="grid-item">
+        <span class="Cost">Cost: </span>
+        <input asp-for="@Model.monthlyBill.Cost" class="form-control" required ="required" />
+        <span asp-validation-for="@Model.monthlyBill.Cost" class="text-danger"></span>
+    </div>
         <div class="grid-item">
             <span class="Date">Day Of Month: </span>
-            @*<input type="text" name="Date" id="Date" required>*@
             @Html.DropDownList("Day Of Month", Enumerable.Range(1, 31).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "Date form-control" })
         </div>
     </div>
-        <button type="button" id="submitNewMonthlyBill">Submit</button>
+    <button type="button" id="submitNewMonthlyBill">Submit</button>
 </form>
 
 
@@ -40,49 +42,61 @@
     <tbody>
         @foreach (var monthlyBills in Model.MonthlyBills)
         {
-            <tr>
-                <td class="id">
-                    @Html.HiddenFor(modelItem => monthlyBills.id, new { htmlAttributes = new { @class = "form-control id" } })
-                </td>
+        <tr>
+            <td class="id">
+                @Html.HiddenFor(modelItem => monthlyBills.id, new { htmlAttributes = new { @class = "form-control id" } })
+            </td>
 
-                <td class="Bill">
-                    @Html.EditorFor(modelItem => monthlyBills.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })
-                </td>
-                <td class="Cost">
-                    @Html.EditorFor(modelItem => monthlyBills.Cost, new { htmlAttributes = new { @class = "form-control Cost" } })
-                </td>
-                <td class="Date">
-                    @Html.EditorFor(modelItem => monthlyBills.Date, new { htmlAttributes = new { @class = "form-control Date" } })
-                </td>
-                <td>
-                    <a class="UpdateMonthly" href="javascript:;">Update</a>
-                    <a class="DeleteMonthly" href="javascript:;">Delete</a>
-                </td>
-            </tr>
+            <td class="Bill">
+                @Html.EditorFor(modelItem => monthlyBills.Bill, new { htmlAttributes = new { @class = "form-control Bill" } })
+            </td>
+            <td class="Cost">
+                @Html.EditorFor(modelItem => monthlyBills.Cost, new { htmlAttributes = new { @class = "form-control Cost" } })
+            </td>
+            <td class="Date">
+                @Html.EditorFor(modelItem => monthlyBills.Date, new { htmlAttributes = new { @class = "form-control Date" } })
+            </td>
+            <td>
+                <a class="UpdateMonthly" href="javascript:;">Update</a>
+                <a class="DeleteMonthly" href="javascript:;">Delete</a>
+            </td>
+        </tr>
          }
     </tbody>
-    </table>
+</table>
 
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script type="text/javascript">
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-     $("#CreateMonthlyBillForm").validate({
+<script type="text/javascript">
 
-        rules: {
-            Date: {
-                    required: true,
-                    range: [1, 31]
-            }
-        }
-    });
+    // $("#CreateMonthlyBillForm").validate({
+
+    //    rules: {
+    //        Date: {
+    //                required: true,
+    //                range: [1, 31]
+    //        }
+    //    }
+    //});
     $(".CreateMonthly").on("click", function () {
 
         $("#CreateMonthlyBillForm").toggle();
 
     });
+
+
+    $('#form').submit(function() {
+    if ($.trim($("#email").val()) === "" || $.trim($("#user_name").val()) === "") {
+        alert('you did not fill out one of the fields');
+        return false;
+    }
+    });
+
+
 
         $("#submitNewMonthlyBill").click(function () {
             var mb = $("form").serializeArray();
@@ -95,19 +109,31 @@
             var Date = mb[2].value;
             monthlyBillInsert.Date = Date
 
-            $.ajax({
-                url: '@Url.Action("InsertMonthly", "Monthly")',
-                method: 'POST',
-                data: { monthlyBillInsert: monthlyBillInsert },
-                success: function (response) {
-                    $("#CreateMonthlyBillForm").trigger("reset");
-                    $("#CreateMonthlyBillForm").toggle();
-                     $('#PartialMonthly').html(response);
-                },
-                error: function () {
-                    alert("Sorry, there's been an error.");
-                }
-            });
+            if (Bill === "" || Cost === "") {
+                alert('One of the fields is blank');
+                return false;
+            }
+
+            if ($("#CreateMonthlyBillForm").valid()) {
+                $.ajax({
+                    url: '@Url.Action("InsertMonthly", "Monthly")',
+                    method: 'POST',
+                    data: { monthlyBillInsert: monthlyBillInsert },
+                    success: function (response) {
+                        $("#CreateMonthlyBillForm").trigger("reset");
+                        $("#CreateMonthlyBillForm").toggle();
+                        $('#PartialMonthly').html(response);
+                    },
+                    error: function () {
+                        alert("Sorry, there's been an error.");
+                    }
+                });
+            } else {
+                alert("Form is not valid");
+                return false;
+            };
+
+
         });
 
         $(".UpdateMonthly").click(function () {
@@ -164,4 +190,4 @@
             });
     });
 
-    </script>
+</script>
