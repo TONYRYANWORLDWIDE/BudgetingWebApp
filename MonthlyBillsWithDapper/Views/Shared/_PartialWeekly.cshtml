@@ -10,19 +10,20 @@
     <div class="grid-container-Weekly">
         <div class="grid-item">
             <span class="Bill">Bill:</span>
-            <input class="form-control" type="text" name="Bill" required>
+            <input asp-for="@Model.weeklyBill.Bill" class="form-control"/>
+            <span asp-validation-for="@Model.weeklyBill.Bill" class="text-danger"></span>
         </div>
         <div class="grid-item">
             <span class="Cost">Cost: </span>
-            <input class="form-control" type="text" name="Cost" required>
+            <input asp-for="@Model.weeklyBill.Cost" class="form-control" required="required" />
+            <span asp-validation-for="@Model.weeklyBill.Cost" class="text-danger"></span>
         </div>
         <div class="grid-item">
             <span class="DayOfWeek">Day Of Week: </span>
-            @*<input type="text" name="DayOfweek" id="DayOfweek" required>*@
             @Html.DropDownList("Day", new SelectList(Enum.GetValues(typeof(DayOfWeek))), new { @class = "DayOfWeek form-control" })
         </div>
     </div>
-        <button type="button" id="submitNewWeeklyBill">Submit</button>
+    <button type="button" id="submitNewWeeklyBill">Submit</button>
 </form>
 
 
@@ -64,6 +65,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 <script type="text/javascript">
 
 
@@ -92,7 +94,7 @@
         //});
 
 
-    
+
     $(".CreateWeekly").on("click", function () {
 
         $("#CreateWeeklyBillForm").toggle();
@@ -110,6 +112,12 @@
             var DayOfWeek = wb[2].value;
             weeklyBillInsert.DayOfWeek = DayOfWeek
 
+
+            if (Bill === "" || Cost === "") {
+                alert('One of the fields is blank Bitch');
+                return false;
+            }
+
             $.ajax({
                 url: '@Url.Action("InsertWeekly", "Monthly")',
                 method: 'POST',
@@ -124,7 +132,7 @@
                     alert("Sorry, there's been an error.");
                 }
             });
-        });       
+        });
 
          $(".DeleteWeekly").click(function() {
 
@@ -175,8 +183,8 @@
                 success: function (response) {
 
                        alert("Updated Weekly");
- 
-                    //$('#PartialWeekly').html(response);    
+
+                    //$('#PartialWeekly').html(response);
 
                     $.ajax({
 

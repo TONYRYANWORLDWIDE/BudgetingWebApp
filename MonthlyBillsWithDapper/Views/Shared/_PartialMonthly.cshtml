@@ -8,29 +8,20 @@
 <form id="CreateMonthlyBillForm">
 
     <div class="grid-container-Monthly">
-        @Html.ValidationSummary(true, "")
+        @*@Html.ValidationSummary(true, "")*@
         <div class="grid-item">
-            @*@Html.LabelFor(m => m.monthlyBill.Bill)*@
             <span class="Bill">Bill: </span>
-            @*@Html.EditorFor(m => m.monthlyBill.Bill)
-        @Html.ValidationMessageFor(m => m.monthlyBill.Bill)*@
-            <input asp-for="@Model.monthlyBill.Bill" class="form-control" required="required" />
+            <input asp-for="@Model.monthlyBill.Bill" class="form-control"/>
             <span asp-validation-for="@Model.monthlyBill.Bill" class="text-danger"></span>
-
         </div>
-        @Html.ValidationSummary(true, "")
+        @*@Html.ValidationSummary(true, "")*@
     <div class="grid-item">
         <span class="Cost">Cost: </span>
-        @*@Html.EditorFor(m => m.monthlyBill.Cost)
-        @Html.ValidationMessageFor(m => m.monthlyBill.Cost)*@
         <input asp-for="@Model.monthlyBill.Cost" class="form-control" required ="required" />
         <span asp-validation-for="@Model.monthlyBill.Cost" class="text-danger"></span>
-
     </div>
-
         <div class="grid-item">
             <span class="Date">Day Of Month: </span>
-            @*<input type="text" name="Date" id="Date" required>*@
             @Html.DropDownList("Day Of Month", Enumerable.Range(1, 31).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "Date form-control" })
         </div>
     </div>
@@ -97,6 +88,16 @@
 
     });
 
+
+    $('#form').submit(function() {
+    if ($.trim($("#email").val()) === "" || $.trim($("#user_name").val()) === "") {
+        alert('you did not fill out one of the fields');
+        return false;
+    }
+    });
+
+
+
         $("#submitNewMonthlyBill").click(function () {
             var mb = $("form").serializeArray();
             console.log(mb);
@@ -107,6 +108,11 @@
             monthlyBillInsert.Cost = Cost
             var Date = mb[2].value;
             monthlyBillInsert.Date = Date
+
+            if (Bill === "" || Cost === "") {
+                alert('One of the fields is blank Bitch');
+                return false;
+            }
 
             $.ajax({
                 url: '@Url.Action("InsertMonthly", "Monthly")',
