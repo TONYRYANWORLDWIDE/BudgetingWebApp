@@ -29,6 +29,7 @@ namespace MonthlyBillsWithDapper.Models
         public Entity.DayOfWeek dayofWeek { get; set; }
         public MonthlyBill monthlyBill { get; set; }
         public WeeklyBill weeklyBill { get; set; }
+        public BringHome bringHome { get; set; }
 
 
 

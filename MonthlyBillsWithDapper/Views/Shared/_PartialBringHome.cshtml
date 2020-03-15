@@ -1,41 +1,24 @@
 ﻿@model MonthlyBillsWithDapper.Models.BillsViewModel
+@using MonthlyBillsWithDapper.Entity
 
 
 <a class="CreateBringHome" href="javascript:;">Create</a>
-
-@*<form id="CreateBringHomeForm">
-        <span class="Name">Name:</span>
-        <input type="text" name="Name" required>
-
-        <span class="Amount">Amount: </span>
-        <input type="text" name="Amount" required>
-
-        <span class="Date">Day Of Week: </span>
-        @Html.DropDownList("Day", new SelectList(Enum.GetValues(typeof(DayOfWeek))))
-
-        <span class="Frequency">Frequency</span>
-        @Html.DropDownList("Frequency", new SelectList(Enum.GetValues(typeof(Entity.Frequency))), new { @class = "FrequencySelector" })
-
-        <span class="PickOnePayDate">PickOnePayDate</span>
-        <input class="datepicker" type="date" id="datepicker">
-
-        <button type="button" id="submitNewBringHome">Submit</button>
-    </form>*@
-
 
 <form id="CreateBringHomeForm">
     <div class="grid-container-BringHome">
         <div class="grid-item">
             <span class="Name">Name:</span>
-            <input class="form-control" type="text" name="Name" required>
+            <input asp-for="@Model.bringHome.Name" class="form-control" />
+            <span asp-validation-for="@Model.bringHome.Name" class="text-danger"></span>
         </div>
         <div class="grid-item">
             <span class="Amount ">Amount: </span>
-            <input class="form-control" type="text" name="Amount" required>
+            <input asp-for="@Model.bringHome.amount" class="form-control" />
+            <span asp-validation-for="@Model.bringHome.amount" class="text-danger"></span>
         </div>
         <div class="grid-item">
             <span class="Date">Day Of Week: </span>
-            @Html.DropDownList("Day Of Week", new SelectList(Enum.GetValues(typeof(DayOfWeek))),new { @class = "DayOfWeek form-control" })
+            @Html.DropDownList("Day Of Week", new SelectList(Enum.GetValues(typeof(Entity.DayOfWeek))), new { @class = "DayOfWeek form-control" })
         </div>
         <div class="grid-item">
             <span class="Frequency">Frequency</span>
@@ -95,6 +78,7 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 <script type="text/javascript">
 
     $(".CreateBringHome").on("click", function () {
@@ -121,31 +105,46 @@
         bringHome.Frequency = Frequency;
 
         bringHome.PickOnePayDate = $(".datepicker").val();
-        $.ajax({
+        var PickOnePayDate = bringHome.PickOnePayDate;
+        debugger;
+        console.log(PickOnePayDate);
+
+        if (Name === "" || amount === "") {
+        alert('One of the fields is blank');
+        return false;
+        }
+
+
+        if ($("#CreateBringHomeForm").valid()) {
+            $.ajax({
                 url: '@Url.Action("InsertBringHome", "BringHome")',
                 method: 'POST',
-                data: { bringHome : bringHome },
-            success: function (response) {
-                $("#CreateBringHomeForm").trigger("reset");
-                $("#CreateBringHomeForm").toggle();
-                //$('#PartialBringHome').html(response);
+                data: { bringHome: bringHome },
+                success: function (response) {
+                    $("#CreateBringHomeForm").trigger("reset");
+                    $("#CreateBringHomeForm").toggle();
+                    //$('#PartialBringHome').html(response);
 
-                $.ajax({
-                    url: '@Url.Action("PartialBringHome", "BringHome")',
-                    success: function (response) {
-                        $("#PartialBringHome").html(response);
-                    },
-                    error : function() {
-                        alert("Error on embeeded ajax");
-                    }
+                    $.ajax({
+                        url: '@Url.Action("PartialBringHome", "BringHome")',
+                        success: function (response) {
+                            $("#PartialBringHome").html(response);
+                        },
+                        error: function () {
+                            alert("Error on embeeded ajax");
+                        }
 
-                });
+                    });
 
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");
                 }
-        });
+            });
+        } else {
+            alert("Form is not valid");
+            return false;
+        };
     });
 
 
