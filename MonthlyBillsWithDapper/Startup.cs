@@ -12,16 +12,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.Web.BrowserLink;
 using MonthlyBillsWithDapper.Areas.Identity;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-using Azure.Core;
-
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.Services.AppAuthentication;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MonthlyBillsWithDapper
 {
     public class Startup
     {
-        public static string ConnectionString { get; private set; }
+        public static Task<string> ConnectionString { get; private set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -48,10 +48,21 @@ namespace MonthlyBillsWithDapper
 
         }
 
+        [HttpGet]
+        public async Task<string> Get()
+        {
+            var azureServiceTokenProvider = new AzureServiceTokenProvider();
+            var kv = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
+            string secret = (await kv.GetSecretAsync("https://trkeyvault3.vault.azure.net/", "connectionstring")).Value;
+            return secret;
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            ConnectionString = Configuration.GetConnectionString("Bills");
+            //ConnectionString = Configuration.GetConnectionString("Bills");
+            ConnectionString = Get();
+         
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -68,24 +79,6 @@ namespace MonthlyBillsWithDapper
             app.UseStaticFiles();
             app.UseAuthorization();
             app.UseAuthentication();
-
-            SecretClientOptions options = new SecretClientOptions()
-            {
-                Retry =
-                {
-                    Delay= TimeSpan.FromSeconds(2),
-                    MaxDelay = TimeSpan.FromSeconds(16),
-                    MaxRetries = 5,
-                    Mode = RetryMode.Exponential
-                 }
-            };
-            //var client = new SecretClient(new Uri("https://trkeyvault3.vault.azure.net/"), new DefaultAzureCredential(), options);
-
-            //KeyVaultSecret secret = client.GetSecret("connectionstring");
-
-            //string ConnectionString = secret.Value;
-
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -12,15 +12,15 @@ namespace MonthlyBillsWithDapper.Data
     {
         public class Instance<T>
         {
-            private string connectionString;
+            private Task<string> connectionString;
             public Instance()
             {
                 connectionString = Startup.ConnectionString;
             }
 
-            public IEnumerable<T> Execute(string proc, DynamicParameters parameters = null)
+            public async Task<IEnumerable<T>> Execute(string proc, DynamicParameters parameters = null)
             {
-                using (var conn = new SqlConnection(connectionString))
+                using (var conn = new SqlConnection(await connectionString))
                 {
                     try
                     {
