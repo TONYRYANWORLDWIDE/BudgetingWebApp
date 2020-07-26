@@ -14,7 +14,8 @@ namespace MonthlyBillsWithDapper.Entity
         public string Name { get; set; }
 
 
-        [Range(0, 99999)]
+        [Range(0, 9999)]
+        [Display(Name = "amount")]
         public float amount { get; set; }
         public string DayOfWeek { get; set; }
         public string Frequency { get; set; }
