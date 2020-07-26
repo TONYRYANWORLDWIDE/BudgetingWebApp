@@ -12,6 +12,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.Web.BrowserLink;
 using MonthlyBillsWithDapper.Areas.Identity;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Core;
 
 
 namespace MonthlyBillsWithDapper
@@ -65,6 +68,24 @@ namespace MonthlyBillsWithDapper
             app.UseStaticFiles();
             app.UseAuthorization();
             app.UseAuthentication();
+
+            SecretClientOptions options = new SecretClientOptions()
+            {
+                Retry =
+                {
+                    Delay= TimeSpan.FromSeconds(2),
+                    MaxDelay = TimeSpan.FromSeconds(16),
+                    MaxRetries = 5,
+                    Mode = RetryMode.Exponential
+                 }
+            };
+            //var client = new SecretClient(new Uri("https://trkeyvault3.vault.azure.net/"), new DefaultAzureCredential(), options);
+
+            //KeyVaultSecret secret = client.GetSecret("connectionstring");
+
+            //string ConnectionString = secret.Value;
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
