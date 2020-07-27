@@ -119,8 +119,8 @@ html {
 }
 
 @media only screen 
-    and (device-width: 414px) 
-    and (device-height: 896px) 
+    and (device-width: 375px) 
+    and (device-height: 812px) 
     and (-webkit-device-pixel-ratio: 2) {
     .DayOfWeek {
         display: none;
@@ -129,8 +129,8 @@ html {
 
 
 @media only screen 
-    and (device-width: 414px) 
-    and (device-height: 896px) 
+    and (device-width: 375px) 
+    and (device-height: 812px) 
     and (-webkit-device-pixel-ratio: 2) {
 
     .Type {
