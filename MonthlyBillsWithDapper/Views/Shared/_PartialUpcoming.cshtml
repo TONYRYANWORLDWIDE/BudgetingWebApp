@@ -6,9 +6,9 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Date</th>
+            <th style="width:10%;">Date</th>
             <th class="DayOfWeek">Day Of Week</th>
-            <th>Type</th>
+            <th class="Type">Type</th>
             <th>Amount</th>
             <th>Running Total</th>
             <th></th>
@@ -24,7 +24,7 @@
                 </td>
 
                 <td class="TheDate">
-                    @Html.EditorFor(modelItem => upcomingBill.TheDate, new { htmlAttributes = new { @class = "form-control TheDate" } })
+                    @Html.EditorFor(modelItem => upcomingBill.TheDate,"{0:d}", new { htmlAttributes = new { @class = "form-control TheDate" } })
                 </td>
                 <td class="DayOfWeek">
                     @Html.EditorFor(modelItem => upcomingBill.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
