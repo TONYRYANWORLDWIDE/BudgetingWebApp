@@ -33,19 +33,22 @@
 </form>
 
 <table id="BringHomeBillsTable" class="table">
+    
     <thead>
         <tr>
             <th class="TJR_th_Hidden"></th>
             <th>Name</th>
-            <th>Amount</th>
+            <th>Amountz</th>
             <th>Day Of Week</th>
             <th>Frequency</th>
             <th>Pay Date</th>
         </tr>
     </thead>
     <tbody>
+
         @foreach (var bringhome in Model.BringHomes)
         {
+
             <tr>
                 <td class="id">
                     @Html.HiddenFor(modelItem => bringhome.id, new { htmlAttributes = new { @class = "form-control id" } })
@@ -55,10 +58,10 @@
                     @Html.EditorFor(modelItem => bringhome.Name, new { htmlAttributes = new { @class = "form-control Name" } })
                 </td>
                 <td class="amount">
-                    @*@Html.EditorFor(modelItem => bringhome.amount, new { htmlAttributes = new { @class = "form-control amount" } })
-                    @Html.ValidationMessageFor(modelItem => bringhome.amount, "", new { @class = "text-danger" })*@
-                    <input asp-for="@Model.bringHome.amount" class="form-control" />
-                    <span asp-validation-for="@Model.bringHome.amount" class="text-danger"></span>
+                    @Html.EditorFor(modelItem => bringhome.amount, new { htmlAttributes = new { @class = "form-control amount" } })
+                    @Html.ValidationMessageFor(modelItem => bringhome.amount, "", new { @class = "text-danger" })
+                    @*<input asp-for="@Model.bringHome.amount" class="form-control" />
+                    <span asp-validation-for="@Model.bringHome.amount" class="text-danger"></span>*@
                 </td>
                 <td class="DayOfWeek">
                     @Html.EditorFor(modelItem => bringhome.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
@@ -135,9 +138,7 @@
                         error: function () {
                             alert("Error on embeeded ajax");
                         }
-
                     });
-
                 },
                 error: function () {
                     alert("Sorry, there's been an error.");

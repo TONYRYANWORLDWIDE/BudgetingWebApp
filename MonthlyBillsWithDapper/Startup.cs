@@ -45,7 +45,6 @@ namespace MonthlyBillsWithDapper
                 options.ClientId = "980072325837-18l2k3f353i3gpvkda6vflf3gvr9a0ai.apps.googleusercontent.com"; // TODO pull from json settings
                 options.ClientSecret = "nFGVI5SYmtkHRj05O_KjycsN"; // TODO pull from json settings
             });
-
         }
 
         [HttpGet]
