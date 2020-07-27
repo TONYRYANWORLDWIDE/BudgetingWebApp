@@ -39,11 +39,8 @@ namespace MonthlyBillsWithDapper.Controllers
             var model = new BillsViewModel();
             var mgr = new GetBills();
             var bh = new BringHomeLogic();
-            //model.MonthlyBills = mgr.getMonthlyBills(ASPUser);
-            //model.WeeklyBills = mgr.getWeeklyBills(ASPUser);
             model.TheUpcomingBills = mgr.getUpcomingBills(ASPUser);
             model.bankBalance = mgr.getBankBalance(ASPUser);
-            //model.BringHomes = bh.getBringHome(ASPUser);
             return View(model);
         }
     }

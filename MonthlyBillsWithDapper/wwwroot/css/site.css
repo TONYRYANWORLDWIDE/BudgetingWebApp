@@ -7,6 +7,23 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.grid-container {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: auto auto auto auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+}
+
+.grid-container-upcoming {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: auto 10px auto auto auto auto auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+}
+
+
 .grid-container-balance {
     display: grid;
     grid-template-columns: auto;
@@ -16,12 +33,7 @@ a.navbar-brand {
 }
 
 
-.grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px;
-}
+
 
 .grid-container-BringHome {
     display: grid;
@@ -42,7 +54,7 @@ a.navbar-brand {
     background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 20px 0;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 /*.grid-item {
@@ -86,12 +98,23 @@ a {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 11px;
 }
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
+}
+
+@media (max-width: 900px) {
+    .DayOfWeek {
+        display: none;
+    }
+}
+@media (max-width: 900px) {
+    .Type {
+        display: none;
+    }
 }
 
 .border-top {

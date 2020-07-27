@@ -5,14 +5,14 @@
 <table id="UpcomingBillsTable" class="table">
     <thead>
         <tr>
-            <th style="width: 20%;">Name</th>
-            <th style="width: 10%;">Date</th>
-            <th style="width: 15%;">Day Of Week</th>
-            <th style="width: 12%;">Type</th>
-            <th style="width: 12%;">Amount</th>
-            <th style="width: 12%;">Running Total</th>
+            <th>Name</th>
+            <th style="width:10%;">Date</th>
+            <th class="DayOfWeek">Day Of Week</th>
+            <th class="Type">Type</th>
+            <th>Amount</th>
+            <th>Running Total</th>
             <th></th>
-            <th style="width: 3%;">Paid</th>
+            <th>Paid</th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
                 </td>
 
                 <td class="TheDate">
-                    @Html.EditorFor(modelItem => upcomingBill.TheDate, new { htmlAttributes = new { @class = "form-control TheDate" } })
+                    @Html.EditorFor(modelItem => upcomingBill.TheDate,"{0:d}", new { htmlAttributes = new { @class = "form-control TheDate" } })
                 </td>
                 <td class="DayOfWeek">
                     @Html.EditorFor(modelItem => upcomingBill.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
@@ -43,7 +43,7 @@
                 </td>
                 <td class="Paid">
                     @Html.CheckBoxFor(modelItem => upcomingBill.Paid, new { @class = "k-checkbox Paid" })
-                    @*<input type="checkbox" asp-for = "@upcomingBill.Paid" />*@
+
                 </td>
             </tr>
         }

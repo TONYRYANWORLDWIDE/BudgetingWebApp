@@ -14,7 +14,7 @@ namespace MonthlyBillsWithDapper.Logic
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("ASPUser", ASPUser);
-            var bringhome = new Instance<BringHome>().Execute("dbo.getBringHome", parameters).ToList();
+            var bringhome = new Instance<BringHome>().Execute("dbo.getBringHome", parameters).Result.ToList();
             return bringhome;
         }
 

@@ -15,14 +15,14 @@ namespace MonthlyBillsWithDapper.Logic
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("ASPUser", ASPUser);
-            var upcomingBills = new Instance<UpcomingBill>().Execute("dbo.getUpcomingBills", parameters).ToList();
+            var upcomingBills = new Instance<UpcomingBill>().Execute("dbo.getUpcomingBills", parameters).Result.ToList();
             return upcomingBills;
         }
         public List<MonthlyBill> getMonthlyBills(string ASPUser)
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("ASPUser", ASPUser);
-            var monthlyBills = new Instance<MonthlyBill>().Execute("dbo.getMonthlyBills", parameters).ToList();
+            var monthlyBills = new Instance<MonthlyBill>().Execute("dbo.getMonthlyBills", parameters).Result.ToList();
             return monthlyBills;
         }
 
@@ -30,7 +30,7 @@ namespace MonthlyBillsWithDapper.Logic
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("ASPUser", ASPUser);
-            var weeklyBills = new Instance<WeeklyBill>().Execute("dbo.getWeeklyBills", parameters).ToList();
+            var weeklyBills = new Instance<WeeklyBill>().Execute("dbo.getWeeklyBills", parameters).Result.ToList();
             return weeklyBills;
         }
 
@@ -38,7 +38,7 @@ namespace MonthlyBillsWithDapper.Logic
         {
             DynamicParameters parameters = new DynamicParameters();
             parameters.Add("ASPUser", ASPUser);
-            var BankBalance = new Instance<BankBalance>().Execute("dbo.getBankBalance", parameters).FirstOrDefault();
+            var BankBalance = new Instance<BankBalance>().Execute("dbo.getBankBalance", parameters).Result.FirstOrDefault();
             return BankBalance;
         }
 
