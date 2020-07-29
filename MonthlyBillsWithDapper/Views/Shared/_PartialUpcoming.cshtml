@@ -7,7 +7,7 @@
         <tr>
             <th>Name</th>
             <th style="width:10%;">Date</th>
-            <th class="DayOfWeek">Day Of Week</th>
+            <th class="DayOfWeekUP">Day Of Week</th>
             <th class="Type">Type</th>
             <th>Amount</th>
             <th>Running Total</th>
@@ -27,7 +27,7 @@
                     @Html.EditorFor(modelItem => upcomingBill.TheDate,"{0:d}", new { htmlAttributes = new { @class = "form-control TheDate" } })
                 </td>
                 <td class="DayOfWeek">
-                    @Html.EditorFor(modelItem => upcomingBill.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeek" } })
+                    @Html.EditorFor(modelItem => upcomingBill.DayOfWeek, new { htmlAttributes = new { @class = "form-control DayOfWeekUP" } })
                 </td>
                 <td class="Type">
                     @Html.EditorFor(modelItem => upcomingBill.Type, new { htmlAttributes = new { @class = "form-control Type" } })
@@ -62,7 +62,7 @@
             
         upComingPaid.TheDate = row.find(".TheDate").find('input').val();
         upComingPaid.Name = row.find(".Name").find('input').val();
-        upComingPaid.DayOfWeek = row.find(".DayOfWeek").find('input').val()
+        upComingPaid.DayOfWeek = row.find(".DayOfWeekUP").find('input').val()
         upComingPaid.Amount = row.find(".Amount").find('input').val();
         upComingPaid.Type = row.find(".Type").find('input').val();
 

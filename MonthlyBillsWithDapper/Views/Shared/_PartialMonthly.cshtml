@@ -99,7 +99,7 @@
 
 
         $("#submitNewMonthlyBill").click(function () {
-            var mb = $("form").serializeArray();
+            var mb = $("#CreateMonthlyBillForm").serializeArray();
             console.log(mb);
             var monthlyBillInsert = {}
             var Bill = mb[0].value;
@@ -107,8 +107,8 @@
             var Cost = mb[1].value;
             monthlyBillInsert.Cost = Cost
             var Date = mb[2].value;
+            console.log(Date);
             monthlyBillInsert.Date = Date
-
             if (Bill === "" || Cost === "") {
                 alert('One of the fields is blank');
                 return false;
@@ -132,8 +132,6 @@
                 alert("Form is not valid");
                 return false;
             };
-
-
         });
 
         $(".UpdateMonthly").click(function () {

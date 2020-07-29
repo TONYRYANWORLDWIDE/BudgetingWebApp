@@ -108,7 +108,7 @@ html {
 
 @media only screen 
     and (max-width: 900px) {
-    .DayOfWeek {
+    .DayOfWeekUP {
         display: none;
     }
 }
